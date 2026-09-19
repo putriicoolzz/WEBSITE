@@ -84,10 +84,10 @@
 
             </div>
 
-            <div class="scroll-indicator">
+            <a href="#stay" class="scroll-indicator" aria-label="Scroll to rooms">
                 <span>Scroll to explore</span>
                 <div></div>
-            </div>
+            </a>
 
         </section>
 
@@ -99,7 +99,7 @@
         <section class="intro section">
 
             <div class="section-label">
-                WELCOME TO KAIARA
+                WELCOME TO KAIARA GARDEN
             </div>
 
             <div class="intro-grid">
@@ -113,13 +113,13 @@
 
                 <div>
                     <p class="large-text">
-                        Tucked away in the hills of Dago, Kaiara Garden
-                        is a small retreat designed around the simple
+                        Tucked away in the hills of Dago,<span class="desktop-break"><br></span> 
+                        Kaiara Garden is a small retreat designed around <span class="desktop-break"><br></span> the simple
                         pleasures of staying somewhere beautiful.
                     </p>
 
                     <p>
-                        Wake up to greenery, take your time over breakfast,
+                        Wake up to greenery, linger over breakfast,
                         spend an afternoon by the pool, or simply sit back
                         and let the day unfold.
                     </p>
@@ -367,33 +367,53 @@
              ROOM PHOTO GALLERY
         ========================================= -->
 
-        <div class="room-modal-gallery">
+<div class="room-modal-gallery">
 
-            <!-- MAIN PHOTO -->
-            <div class="room-modal-main-image">
-                <span id="modalMainImage">
-                    🔴 [ISI FOTO UTAMA KAMAR]
-                </span>
-            </div>
+    <!-- MAIN PHOTO -->
+    <div class="room-modal-main-image gallery-photo" data-photo-index="0">
+        <span id="modalMainImage">
+            🔴 [ISI FOTO UTAMA KAMAR]
+        </span>
 
-            <!-- ADDITIONAL PHOTOS -->
-            <div class="room-modal-thumbnails">
-
-                <div class="room-modal-thumbnail">
-                    🔴 [ISI FOTO KAMAR 2]
-                </div>
-
-                <div class="room-modal-thumbnail">
-                    🔴 [ISI FOTO KAMAR 3]
-                </div>
-
-                <div class="room-modal-thumbnail">
-                    🔴 [ISI FOTO KAMAR 4]
-                </div>
-
-            </div>
-
+        <div class="gallery-hover">
+            <span>View photo</span>
+            <span class="gallery-hover-icon">↗</span>
         </div>
+    </div>
+
+    <!-- ADDITIONAL PHOTOS -->
+    <div class="room-modal-thumbnails">
+
+        <div class="room-modal-thumbnail gallery-photo" data-photo-index="1">
+            <span>🔴 [ISI FOTO KAMAR 2]</span>
+
+            <div class="gallery-hover">
+                <span>View</span>
+                <span class="gallery-hover-icon">↗</span>
+            </div>
+        </div>
+
+        <div class="room-modal-thumbnail gallery-photo" data-photo-index="2">
+            <span>🔴 [ISI FOTO KAMAR 3]</span>
+
+            <div class="gallery-hover">
+                <span>View</span>
+                <span class="gallery-hover-icon">↗</span>
+            </div>
+        </div>
+
+        <div class="room-modal-thumbnail gallery-photo" data-photo-index="3">
+            <span>🔴 [ISI FOTO KAMAR 4]</span>
+
+            <div class="gallery-hover">
+                <span>View</span>
+                <span class="gallery-hover-icon">↗</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 
 
         <!-- =========================================
@@ -531,6 +551,56 @@
         </div>
 
     </div>
+
+</div>
+
+<!-- =========================================
+     FULLSCREEN ROOM GALLERY
+========================================= -->
+
+<div class="fullscreen-gallery" id="fullscreenGallery" aria-hidden="true">
+
+    <button
+        class="fullscreen-gallery-close"
+        id="galleryClose"
+        type="button"
+        aria-label="Close gallery">
+        ×
+    </button>
+
+    <div class="fullscreen-gallery-counter" id="galleryCounter">
+        1 / 4
+    </div>
+
+    <button
+        class="fullscreen-gallery-arrow fullscreen-gallery-prev"
+        id="galleryPrev"
+        type="button"
+        aria-label="Previous photo">
+        ‹
+    </button>
+
+    <div class="fullscreen-gallery-stage">
+
+        <div class="fullscreen-gallery-image" id="galleryImage">
+            🔴 [ISI FOTO KAMAR]
+        </div>
+
+        <div class="fullscreen-gallery-caption" id="galleryCaption">
+            Kaiara Garden
+        </div>
+
+        <div class="fullscreen-gallery-dots" id="galleryDots"></div>
+
+    </div>
+
+    <button
+        class="fullscreen-gallery-arrow fullscreen-gallery-next"
+        id="galleryNext"
+        type="button"
+        aria-label="Next photo">
+        ›
+    </button>
 
 </div>
 
@@ -1020,10 +1090,10 @@
 
     </footer>
 
-
-    <script src="script.js"></script>
+ <script src="script.js"></script>
 
     <script>
+
 /* =========================================
    ROOM DETAIL DATA
 ========================================= */
@@ -1252,6 +1322,22 @@ function closeRoomModal() {
     document.body.classList.remove("room-modal-open");
 }
 
+/* -----------------------------------------
+   ROOM MODAL → BOOKING
+----------------------------------------- */
+
+const roomModalBookButton =
+    document.querySelector(".room-modal-book-button");
+
+if (roomModalBookButton) {
+
+    roomModalBookButton.addEventListener("click", function () {
+
+        closeRoomModal();
+
+    });
+
+}
 
 /* =========================================
    ROOM CARD CLICK
@@ -1319,6 +1405,7 @@ document.addEventListener("keydown", function(event) {
     }
 
 });
+
 </script>
 
 </body>

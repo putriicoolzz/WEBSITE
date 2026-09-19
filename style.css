@@ -199,6 +199,10 @@ p {
     display: flex;
     gap: 34px;
 }
+/* Hide mobile booking button on desktop */
+.mobile-book {
+    display: none;
+}
 
 .nav-menu a {
     font-size: 13px;
@@ -374,6 +378,8 @@ p {
     text-transform: uppercase;
 
     color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .scroll-indicator div {
@@ -1409,6 +1415,9 @@ body.loaded {
         height: 280px;
     }
 
+    .desktop-break{
+        display:none;
+    }
 }
 
 /* =========================================
@@ -1463,10 +1472,17 @@ body.loaded {
 /* CLOSE BUTTON */
 
 .room-modal-close {
-    position: absolute;
+    position: sticky;
     top: 20px;
-    right: 22px;
-    z-index: 5;
+    margin-left: auto;
+    margin-right: 22px;
+    margin-bottom: -44px;
+
+    z-index: 50;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     width: 44px;
     height: 44px;
@@ -1539,6 +1555,72 @@ body.loaded {
     color: #77756e;
 }
 
+/* ================================
+   ROOM GALLERY INTERACTION
+================================ */
+
+.gallery-photo {
+    position: relative;
+    overflow: hidden;
+    cursor: zoom-in;
+}
+
+.gallery-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(25, 32, 26, 0);
+    transition: background 0.35s ease;
+    pointer-events: none;
+}
+
+.gallery-photo:hover::after {
+    background: rgba(25, 32, 26, 0.14);
+}
+
+.gallery-photo > span {
+    transition: transform 0.45s ease;
+}
+
+.gallery-photo:hover > span {
+    transform: scale(1.025);
+}
+
+.gallery-hover {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 9px 13px;
+
+    background: rgba(250, 249, 245, 0.92);
+    color: var(--kaiara-green);
+
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+
+    opacity: 0;
+    transform: translateY(6px);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.gallery-photo:hover .gallery-hover {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-hover-icon {
+    font-size: 13px;
+}
 
 /* =========================================
    ROOM CONTENT
@@ -1843,4 +1925,262 @@ body.room-modal-open {
         padding: 52px 65px 60px;
     }
 
+}
+
+/* =====================================================
+   FULLSCREEN ROOM GALLERY
+===================================================== */
+
+.fullscreen-gallery {
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(22, 27, 23, 0.96);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+}
+
+.fullscreen-gallery.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* PHOTO AREA */
+
+.fullscreen-gallery-stage {
+    width: min(1100px, 78vw);
+    height: min(760px, 78vh);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* TEMPORARY PHOTO PLACEHOLDER */
+
+.fullscreen-gallery-image {
+    width: 100%;
+    height: calc(100% - 80px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #d9d3c5;
+    color: #777970;
+
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    transition: opacity 0.25s ease;
+}
+
+/* =========================================
+   GALLERY PHOTO TRANSITION
+========================================= */
+
+.fullscreen-gallery-image {
+    transition: opacity 0.22s ease;
+}
+
+.fullscreen-gallery-image.gallery-fade {
+    opacity: 0;
+}
+
+/* CAPTION */
+
+.fullscreen-gallery-caption {
+    margin-top: 18px;
+
+    color: rgba(255,255,255,0.82);
+
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+
+/* CLOSE */
+
+.fullscreen-gallery-close {
+    position: absolute;
+    top: 30px;
+    right: 35px;
+
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50%;
+
+    background: transparent;
+    color: white;
+
+    font-size: 28px;
+    font-weight: 300;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.fullscreen-gallery-close:hover {
+    background: rgba(255,255,255,0.1);
+    transform: rotate(90deg);
+}
+
+
+/* PHOTO COUNTER */
+
+.fullscreen-gallery-counter {
+    position: absolute;
+    top: 45px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: rgba(255,255,255,0.7);
+
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+
+/* ARROWS */
+
+.fullscreen-gallery-arrow {
+    position: absolute;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 55px;
+    height: 55px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+    color: white;
+
+    font-size: 38px;
+    font-weight: 200;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.fullscreen-gallery-arrow:hover {
+    background: rgba(255,255,255,0.16);
+}
+
+.fullscreen-gallery-prev {
+    left: 35px;
+}
+
+.fullscreen-gallery-next {
+    right: 35px;
+}
+
+
+/* DOTS */
+
+.fullscreen-gallery-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 15px;
+}
+
+.gallery-dot {
+    width: 6px;
+    height: 6px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.35);
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.gallery-dot.active {
+    background: var(--kaiara-gold);
+    transform: scale(1.35);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .fullscreen-gallery-stage {
+        width: 100%;
+        height: 75vh;
+
+        padding: 0 20px;
+    }
+
+    .fullscreen-gallery-image {
+        height: calc(100% - 90px);
+    }
+
+    .fullscreen-gallery-prev {
+        left: 12px;
+    }
+
+    .fullscreen-gallery-next {
+        right: 12px;
+    }
+
+    .fullscreen-gallery-arrow {
+        width: 42px;
+        height: 42px;
+
+        font-size: 30px;
+
+        background: rgba(0,0,0,0.25);
+    }
+
+    .fullscreen-gallery-close {
+        top: 20px;
+        right: 20px;
+
+        width: 42px;
+        height: 42px;
+    }
+
+    .fullscreen-gallery-counter {
+        top: 34px;
+    }
 }
