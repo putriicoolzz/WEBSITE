@@ -1604,12 +1604,12 @@ if (cafeReservationForm) {
                 name:
                     document.getElementById(
                         "cafeGuestName"
-                    ).value,
+                    ).value.trim(),
 
                 whatsapp:
                     document.getElementById(
                         "cafeGuestPhone"
-                    ).value,
+                    ).value.trim(),
 
                 date:
                     document.getElementById(
@@ -1629,7 +1629,7 @@ if (cafeReservationForm) {
                 notes:
                     document.getElementById(
                         "cafeReservationNotes"
-                    ).value
+                    ).value.trim()
 
             };
 
@@ -1639,30 +1639,27 @@ if (cafeReservationForm) {
                 submitButton.textContent =
                     "Sending...";
 
-                const response =
-                    await fetch(
-                        CAFE_RESERVATION_API,
-                        {
-                            method: "POST",
-                            body: JSON.stringify(
+                await fetch(
+                    CAFE_RESERVATION_API,
+                    {
+                        method: "POST",
+                        mode: "no-cors",
+
+                        headers: {
+                            "Content-Type":
+                                "text/plain;charset=utf-8"
+                        },
+
+                        body:
+                            JSON.stringify(
                                 reservationData
                             )
-                        }
-                    );
-
-                const result =
-                    await response.json();
-
-                if (!result.success) {
-                    throw new Error(
-                        "Reservation could not be saved."
-                    );
-                }
+                    }
+                );
 
                 alert(
-                    "Test reservation saved successfully.\n\n" +
-                    "Reservation ID: " +
-                    result.reservationId
+                    "Test request sent.\n\n" +
+                    "Please check the Cafe Reservations sheet."
                 );
 
             }
@@ -1675,7 +1672,7 @@ if (cafeReservationForm) {
                 );
 
                 alert(
-                    "We couldn't save the reservation. " +
+                    "We couldn't send the reservation. " +
                     "Please try again."
                 );
 
@@ -1684,6 +1681,7 @@ if (cafeReservationForm) {
             finally {
 
                 submitButton.disabled = false;
+
                 submitButton.textContent =
                     "Continue via WhatsApp";
 
