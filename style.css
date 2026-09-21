@@ -2954,6 +2954,7 @@ body.cafe-modal-open {
 /* INPUTS */
 
 .cafe-form-field input,
+.cafe-form-field select,
 .cafe-form-field textarea {
     width: 100%;
 
@@ -2976,20 +2977,58 @@ body.cafe-modal-open {
         border-color 0.25s ease;
 }
 
+
+/* TIME SELECT */
+
+.cafe-form-field select {
+    appearance: none;
+    -webkit-appearance: none;
+
+    cursor: pointer;
+
+    padding-right: 28px;
+
+    background-image:
+        linear-gradient(
+            45deg,
+            transparent 50%,
+            var(--dark-green) 50%
+        ),
+        linear-gradient(
+            135deg,
+            var(--dark-green) 50%,
+            transparent 50%
+        );
+
+    background-position:
+        calc(100% - 9px) 50%,
+        calc(100% - 4px) 50%;
+
+    background-size:
+        5px 5px,
+        5px 5px;
+
+    background-repeat: no-repeat;
+}
+
+
 .cafe-form-field textarea {
     resize: vertical;
     min-height: 90px;
 }
 
+
 .cafe-form-field input:focus,
+.cafe-form-field select:focus,
 .cafe-form-field textarea:focus {
-    border-bottom-color: var(--kaiara-green);
+    border-bottom-color:
+        var(--kaiara-green);
 }
+
 
 .cafe-form-field textarea::placeholder {
     color: #9a9b95;
 }
-
 
 /* =====================================================
    SUBMIT
