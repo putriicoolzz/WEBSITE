@@ -11,38 +11,114 @@
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.querySelector(".nav-menu");
 
+function openMobileMenu() {
+
+    if (!menuToggle || !navMenu) return;
+
+    navMenu.classList.add("active");
+
+    menuToggle.textContent = "×";
+    menuToggle.setAttribute("aria-label", "Close menu");
+    menuToggle.setAttribute("aria-expanded", "true");
+
+}
+
+
+function closeMobileMenu() {
+
+    if (!menuToggle || !navMenu) return;
+
+    navMenu.classList.remove("active");
+
+    menuToggle.textContent = "☰";
+    menuToggle.setAttribute("aria-label", "Open menu");
+    menuToggle.setAttribute("aria-expanded", "false");
+
+}
+
+
 if (menuToggle && navMenu) {
 
-    menuToggle.addEventListener("click", () => {
+    /* OPEN / CLOSE BUTTON */
 
-        navMenu.classList.toggle("active");
+    menuToggle.addEventListener("click", event => {
 
-        if (navMenu.classList.contains("active")) {
-            menuToggle.textContent = "×";
+        event.stopPropagation();
+
+        const isOpen =
+            navMenu.classList.contains("active");
+
+        if (isOpen) {
+            closeMobileMenu();
         } else {
-            menuToggle.textContent = "☰";
+            openMobileMenu();
         }
 
     });
 
 
-    // Close menu when a navigation link is clicked
+    /* CLOSE AFTER CLICKING A MENU LINK */
 
-    const navLinks = document.querySelectorAll(".nav-menu a");
+    navMenu
+        .querySelectorAll("a")
+        .forEach(link => {
 
-    navLinks.forEach(link => {
-
-        link.addEventListener("click", () => {
-
-            navMenu.classList.remove("active");
-            menuToggle.textContent = "☰";
+            link.addEventListener("click", () => {
+                closeMobileMenu();
+            });
 
         });
+
+
+    /* CLOSE WHEN CLICKING OUTSIDE MENU */
+
+    document.addEventListener("click", event => {
+
+        if (!navMenu.classList.contains("active")) {
+            return;
+        }
+
+        const clickedInsideMenu =
+            navMenu.contains(event.target);
+
+        const clickedToggle =
+            menuToggle.contains(event.target);
+
+        if (!clickedInsideMenu && !clickedToggle) {
+            closeMobileMenu();
+        }
+
+    });
+
+
+    /* CLOSE WITH ESC KEY */
+
+    document.addEventListener("keydown", event => {
+
+        if (
+            event.key === "Escape" &&
+            navMenu.classList.contains("active")
+        ) {
+            closeMobileMenu();
+        }
+
+    });
+
+
+    /* RESET MENU WHEN RETURNING TO DESKTOP */
+
+    window.addEventListener("resize", () => {
+
+        if (
+            window.innerWidth > 850 &&
+            navMenu.classList.contains("active")
+        ) {
+            closeMobileMenu();
+        }
 
     });
 
 }
-
 
 /* =====================================================
    2. FAQ ACCORDION
@@ -1417,6 +1493,9 @@ document.addEventListener(
 const CAFE_RESERVATION_API =
     "https://script.google.com/macros/s/AKfycbyBxDhZ95RvNnH5uyNGuvJBu9PlxKEfDy11TY1O6e-qg2VVA1TkNpB2CDa7lCYr2AmPGA/exec";
 
+const CAFE_WHATSAPP_NUMBER =
+    "6285117195790";
+    
 const cafeReservationForm =
     document.getElementById("cafeReservationForm");
 
@@ -1586,6 +1665,10 @@ if (cafeReservationBack) {
    SUBMIT CAFE RESERVATION
 ----------------------------------------- */
 
+/* -----------------------------------------
+   SUBMIT CAFE RESERVATION
+----------------------------------------- */
+
 if (cafeReservationForm) {
 
     cafeReservationForm.addEventListener(
@@ -1633,11 +1716,55 @@ if (cafeReservationForm) {
 
             };
 
+
+            /* -----------------------------------------
+               CREATE WHATSAPP MESSAGE
+            ----------------------------------------- */
+
+            const formattedDate =
+                new Date(
+                    reservationData.date + "T00:00:00"
+                ).toLocaleDateString(
+                    "en-GB",
+                    {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric"
+                    }
+                );
+
+
+            let whatsappMessage =
+`Hello Kaiara Café, I would like to make a table reservation.
+
+Name: ${reservationData.name}
+WhatsApp: ${reservationData.whatsapp}
+Date: ${formattedDate}
+Time: ${reservationData.time}
+Guests: ${reservationData.guests}`;
+
+            if (reservationData.notes) {
+
+                whatsappMessage +=
+`\nNotes: ${reservationData.notes}`;
+
+            }
+
+            whatsappMessage +=
+`\n\nThank you.`;
+
+
             try {
 
                 submitButton.disabled = true;
+
                 submitButton.textContent =
                     "Sending...";
+
+
+                /* -----------------------------------------
+                   SEND TO GOOGLE SHEET
+                ----------------------------------------- */
 
                 await fetch(
                     CAFE_RESERVATION_API,
@@ -1657,10 +1784,30 @@ if (cafeReservationForm) {
                     }
                 );
 
-                alert(
-                    "Test request sent.\n\n" +
-                    "Please check the Cafe Reservations sheet."
+
+                /* -----------------------------------------
+                   OPEN WHATSAPP
+                ----------------------------------------- */
+
+                const whatsappURL =
+                    "https://wa.me/" +
+                    CAFE_WHATSAPP_NUMBER +
+                    "?text=" +
+                    encodeURIComponent(
+                        whatsappMessage
+                    );
+
+                window.open(
+                    whatsappURL,
+                    "_blank"
                 );
+
+
+                /* -----------------------------------------
+                   CLEAR FORM
+                ----------------------------------------- */
+
+                cafeReservationForm.reset();
 
             }
 
@@ -1672,7 +1819,7 @@ if (cafeReservationForm) {
                 );
 
                 alert(
-                    "We couldn't send the reservation. " +
+                    "We couldn't continue your reservation. " +
                     "Please try again."
                 );
 
@@ -1691,3 +1838,359 @@ if (cafeReservationForm) {
     );
 
 }
+
+/* =========================================
+   ABOUT KAIARA MODAL
+========================================= */
+
+const aboutModal = document.getElementById("aboutModal");
+const openAboutModal = document.getElementById("openAboutModal");
+const closeAboutModal = document.getElementById("closeAboutModal");
+const aboutModalBackdrop = document.getElementById("aboutModalBackdrop");
+
+
+function showAboutModal() {
+
+    if (!aboutModal) return;
+
+    aboutModal.classList.add("active");
+    aboutModal.setAttribute("aria-hidden", "false");
+
+    document.body.classList.add("about-modal-open");
+}
+
+
+function hideAboutModal() {
+
+    if (!aboutModal) return;
+
+    aboutModal.classList.remove("active");
+    aboutModal.setAttribute("aria-hidden", "true");
+
+    document.body.classList.remove("about-modal-open");
+}
+
+
+/* OPEN */
+
+if (openAboutModal) {
+
+    openAboutModal.addEventListener("click", () => {
+        showAboutModal();
+    });
+
+}
+
+
+/* CLOSE BUTTON */
+
+if (closeAboutModal) {
+
+    closeAboutModal.addEventListener("click", () => {
+        hideAboutModal();
+    });
+
+}
+
+
+/* CLICK BACKDROP */
+
+if (aboutModalBackdrop) {
+
+    aboutModalBackdrop.addEventListener("click", () => {
+        hideAboutModal();
+    });
+
+}
+
+
+/* ESC KEY */
+
+document.addEventListener("keydown", event => {
+
+    if (
+        event.key === "Escape" &&
+        aboutModal &&
+        aboutModal.classList.contains("active")
+    ) {
+        hideAboutModal();
+    }
+
+});
+
+/* =========================================
+   FAQ CATEGORY TABS
+========================================= */
+
+const faqTabs = document.querySelectorAll(".faq-tab");
+const faqCategories = document.querySelectorAll(".faq-category");
+
+faqTabs.forEach(tab => {
+
+    tab.addEventListener("click", () => {
+
+        const selectedCategory =
+            tab.dataset.faqCategory;
+
+        // Remove active state from all tabs
+        faqTabs.forEach(item => {
+            item.classList.remove("active");
+        });
+
+        // Hide all FAQ categories
+        faqCategories.forEach(category => {
+            category.classList.remove("active");
+
+            // Close any open FAQ when changing category
+            category
+                .querySelectorAll(".faq-item")
+                .forEach(item => {
+                    item.classList.remove("active");
+                });
+        });
+
+        // Activate selected tab
+        tab.classList.add("active");
+
+        // Show selected category
+        const selectedContent =
+            document.querySelector(
+                `[data-faq-content="${selectedCategory}"]`
+            );
+
+        if (selectedContent) {
+            selectedContent.classList.add("active");
+        }
+
+    });
+
+});
+
+/* =========================================
+   GUEST NOTES SLIDER
+========================================= */
+
+const guestNotes = document.querySelectorAll(".guest-note");
+const guestNotePrev = document.getElementById("guestNotePrev");
+const guestNoteNext = document.getElementById("guestNoteNext");
+const guestNoteCurrent = document.getElementById("guestNoteCurrent");
+const guestNoteTotal = document.getElementById("guestNoteTotal");
+const guestNotesSlider = document.querySelector(".guest-notes-slider");
+
+let currentGuestNote = 0;
+
+
+/* SHOW REVIEW */
+
+function showGuestNote(index) {
+
+    if (!guestNotes.length) return;
+
+    guestNotes.forEach(note => {
+        note.classList.remove("active");
+    });
+
+    if (index < 0) {
+        currentGuestNote = guestNotes.length - 1;
+    } else if (index >= guestNotes.length) {
+        currentGuestNote = 0;
+    } else {
+        currentGuestNote = index;
+    }
+
+    guestNotes[currentGuestNote].classList.add("active");
+
+    if (guestNoteCurrent) {
+        guestNoteCurrent.textContent =
+            String(currentGuestNote + 1).padStart(2, "0");
+    }
+
+}
+
+
+/* TOTAL REVIEWS */
+
+if (guestNoteTotal) {
+    guestNoteTotal.textContent =
+        String(guestNotes.length).padStart(2, "0");
+}
+
+
+/* ARROWS */
+
+if (guestNotePrev) {
+    guestNotePrev.addEventListener("click", () => {
+        showGuestNote(currentGuestNote - 1);
+    });
+}
+
+if (guestNoteNext) {
+    guestNoteNext.addEventListener("click", () => {
+        showGuestNote(currentGuestNote + 1);
+    });
+}
+
+
+/* =========================================
+   MOBILE SWIPE
+========================================= */
+
+let guestTouchStartX = 0;
+let guestTouchEndX = 0;
+
+if (guestNotesSlider) {
+
+    guestNotesSlider.addEventListener(
+        "touchstart",
+        event => {
+            guestTouchStartX =
+                event.changedTouches[0].screenX;
+        },
+        { passive: true }
+    );
+
+    guestNotesSlider.addEventListener(
+        "touchend",
+        event => {
+
+            guestTouchEndX =
+                event.changedTouches[0].screenX;
+
+            const swipeDistance =
+                guestTouchEndX - guestTouchStartX;
+
+            const minimumSwipe = 50;
+
+            if (Math.abs(swipeDistance) < minimumSwipe) {
+                return;
+            }
+
+            if (swipeDistance < 0) {
+
+                // Swipe left → next review
+                showGuestNote(currentGuestNote + 1);
+
+            } else {
+
+                // Swipe right → previous review
+                showGuestNote(currentGuestNote - 1);
+
+            }
+
+        },
+        { passive: true }
+    );
+
+}
+
+
+/* INITIAL STATE */
+
+showGuestNote(0);
+
+/* =========================================
+   NAVBAR ACTIVE SECTION
+========================================= */
+
+const navbarLinks =
+    document.querySelectorAll(".nav-link");
+
+const navSections = [
+    {
+        nav: "about",
+        element:
+            document.getElementById("about") ||
+            document.getElementById("home")
+    },
+    {
+        nav: "stay",
+        element: document.getElementById("stay")
+    },
+    {
+        nav: "cafe",
+        element: document.getElementById("cafe")
+    },
+    {
+        nav: "experience",
+        element: document.getElementById("experience")
+    },
+    {
+        nav: "gallery",
+        element: document.getElementById("gallery")
+    },
+    {
+        nav: "location",
+        element: document.getElementById("location")
+    }
+];
+
+
+function setActiveNav(navName) {
+
+    navbarLinks.forEach(link => {
+
+        link.classList.toggle(
+            "active",
+            link.dataset.nav === navName
+        );
+
+    });
+
+}
+
+
+function updateActiveNav() {
+
+    const navbarHeight =
+        window.innerWidth <= 850
+            ? 70
+            : 82;
+
+    const detectionPoint =
+        window.scrollY +
+        navbarHeight +
+        window.innerHeight * 0.28;
+
+    let currentNav = "about";
+    let closestSectionTop = -Infinity;
+
+
+    navSections.forEach(section => {
+
+        if (!section.element) return;
+
+        const sectionTop =
+            section.element.offsetTop;
+
+        if (
+            sectionTop <= detectionPoint &&
+            sectionTop > closestSectionTop
+        ) {
+
+            closestSectionTop = sectionTop;
+            currentNav = section.nav;
+
+        }
+
+    });
+
+
+    setActiveNav(currentNav);
+
+}
+
+
+window.addEventListener(
+    "scroll",
+    updateActiveNav,
+    { passive: true }
+);
+
+
+window.addEventListener(
+    "resize",
+    updateActiveNav
+);
+
+
+updateActiveNav();

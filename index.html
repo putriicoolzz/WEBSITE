@@ -16,30 +16,60 @@
 <body>
 
     <!-- =========================
-         NAVBAR
-    ========================== -->
+     NAVBAR
+========================== -->
 
     <header class="navbar">
 
-        <a href="#home" class="logo">
+        <a href="#home" class="logo" aria-label="Kaiara Garden home">
             <img src="images/logo/kaiara-logo.png" alt="Kaiara Garden">
         </a>
 
+
         <nav class="nav-menu">
-            <a href="#stay">Stay</a>
-            <a href="#experience">Experience</a>
-            <a href="#cafe">Café</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#location">Location</a>
+
+            <a href="#about" class="nav-link active" data-nav="about">
+                About Us
+            </a>
+
+            <a href="#stay" class="nav-link" data-nav="stay">
+                Stay
+            </a>
+
+            <a href="#cafe" class="nav-link" data-nav="cafe">
+                Café
+            </a>
+
+            <a href="#experience" class="nav-link" data-nav="experience">
+                Experience
+            </a>
+
+            <a href="#gallery" class="nav-link" data-nav="gallery">
+                Gallery
+            </a>
+
+            <a href="#location" class="nav-link" data-nav="location">
+                Location
+            </a>
+
+
+            <!-- MOBILE BOOKING CTA -->
 
             <a href="#booking" class="mobile-book">
                 Book Your Stay
             </a>
+
         </nav>
+
+
+        <!-- DESKTOP BOOKING CTA -->
 
         <a href="#booking" class="nav-book">
             Book Your Stay
         </a>
+
+
+        <!-- MOBILE MENU -->
 
         <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu">
             ☰
@@ -75,13 +105,12 @@
                 </p>
 
                 <div class="hero-buttons">
-                    <a href="#booking" class="btn btn-primary">
-                        Book Your Stay
+
+                    <a href="#stay" class="hero-explore-link">
+                        Explore Kaiara
+                        <span aria-hidden="true">→</span>
                     </a>
 
-                    <a href="#stay" class="btn btn-outline">
-                        Explore Kaiara
-                    </a>
                 </div>
 
             </div>
@@ -98,7 +127,7 @@
              INTRO
         ========================== -->
 
-        <section class="intro section">
+        <section class="intro section" id="about">
 
             <div class="section-label">
                 WELCOME TO KAIARA GARDEN
@@ -127,9 +156,17 @@
                         and let the day unfold.
                     </p>
 
-                    <a href="#stay" class="text-link">
-                        Discover the stay →
-                    </a>
+                    <div class="intro-links">
+
+                        <a href="#stay" class="text-link">
+                            Discover the stay →
+                        </a>
+
+                        <button class="text-link intro-story-link" id="openAboutModal" type="button">
+                            Read our story →
+                        </button>
+
+                    </div>
                 </div>
 
             </div>
@@ -768,7 +805,7 @@
                         </a>
 
                         <!-- 🔴 TODO: Replace with dedicated Kaiara Café WhatsApp link -->
-                        <a href="🔴 [CAFÉ WHATSAPP LINK]" class="text-link cafe-reservation-link" target="_blank"
+                        <a href="https://wa.me/6285117195790" class="text-link cafe-reservation-link" target="_blank"
                             rel="noopener">
                             Reserve a Table →
                         </a>
@@ -857,47 +894,45 @@
 
                     <!-- TIME -->
                     <div class="cafe-form-field">
-    <label for="cafeReservationTime">
-        Time <span>*</span>
-    </label>
+                        <label for="cafeReservationTime">
+                            Time <span>*</span>
+                        </label>
 
-    <select id="cafeReservationTime"
-            name="reservationTime"
-            required>
+                        <select id="cafeReservationTime" name="reservationTime" required>
 
-        <option value="" selected disabled>
-            Select a time
-        </option>
+                            <option value="" selected disabled>
+                                Select a time
+                            </option>
 
-        <option value="07:00">07:00</option>
-        <option value="07:30">07:30</option>
-        <option value="08:00">08:00</option>
-        <option value="08:30">08:30</option>
-        <option value="09:00">09:00</option>
-        <option value="09:30">09:30</option>
-        <option value="10:00">10:00</option>
-        <option value="10:30">10:30</option>
-        <option value="11:00">11:00</option>
-        <option value="11:30">11:30</option>
-        <option value="12:00">12:00</option>
-        <option value="12:30">12:30</option>
-        <option value="13:00">13:00</option>
-        <option value="13:30">13:30</option>
-        <option value="14:00">14:00</option>
-        <option value="14:30">14:30</option>
-        <option value="15:00">15:00</option>
-        <option value="15:30">15:30</option>
-        <option value="16:00">16:00</option>
-        <option value="16:30">16:30</option>
-        <option value="17:00">17:00</option>
-        <option value="17:30">17:30</option>
-        <option value="18:00">18:00</option>
-        <option value="18:30">18:30</option>
-        <option value="19:00">19:00</option>
-        <option value="19:30">19:30</option>
+                            <option value="07:00">07:00</option>
+                            <option value="07:30">07:30</option>
+                            <option value="08:00">08:00</option>
+                            <option value="08:30">08:30</option>
+                            <option value="09:00">09:00</option>
+                            <option value="09:30">09:30</option>
+                            <option value="10:00">10:00</option>
+                            <option value="10:30">10:30</option>
+                            <option value="11:00">11:00</option>
+                            <option value="11:30">11:30</option>
+                            <option value="12:00">12:00</option>
+                            <option value="12:30">12:30</option>
+                            <option value="13:00">13:00</option>
+                            <option value="13:30">13:30</option>
+                            <option value="14:00">14:00</option>
+                            <option value="14:30">14:30</option>
+                            <option value="15:00">15:00</option>
+                            <option value="15:30">15:30</option>
+                            <option value="16:00">16:00</option>
+                            <option value="16:30">16:30</option>
+                            <option value="17:00">17:00</option>
+                            <option value="17:30">17:30</option>
+                            <option value="18:00">18:00</option>
+                            <option value="18:30">18:30</option>
+                            <option value="19:00">19:00</option>
+                            <option value="19:30">19:30</option>
 
-    </select>
-</div>
+                        </select>
+                    </div>
 
                     <!-- NUMBER OF GUESTS -->
                     <div class="cafe-form-field">
@@ -1346,82 +1381,347 @@
 
 
         <!-- =========================
-             FAQ
+     FAQ
+========================== -->
+
+        <section class="faq" id="faq">
+
+            <div class="faq-inner section">
+
+                <div class="section-heading faq-heading">
+
+                    <div>
+
+                        <p class="section-label">
+                            GOOD TO KNOW
+                        </p>
+
+                        <h2>
+                            A few things<br>
+                            before you arrive.
+                        </h2>
+
+                    </div>
+
+                    <p class="faq-intro">
+                        Everything you may want to know about
+                        staying, dining, and gathering at Kaiara.
+                    </p>
+
+                </div>
+
+
+                <!-- FAQ TABS -->
+
+                <div class="faq-tabs" role="tablist">
+
+                    <button class="faq-tab active" type="button" data-faq-category="stay">
+                        Stay
+                    </button>
+
+                    <button class="faq-tab" type="button" data-faq-category="cafe">
+                        Café
+                    </button>
+
+                    <button class="faq-tab" type="button" data-faq-category="events">
+                        Events
+                    </button>
+
+                </div>
+
+
+                <!-- =========================
+             STAY FAQ
         ========================== -->
 
-        <section class="faq section">
+                <div class="faq-category active" data-faq-content="stay">
 
-            <div class="section-heading centered">
+                    <div class="faq-item">
 
-                <p class="section-label">
-                    GOOD TO KNOW
-                </p>
+                        <button class="faq-question" type="button">
+                            What time is check-in and check-out?
+                            <span>+</span>
+                        </button>
 
-                <h2>
-                    Before you arrive.
-                </h2>
+                        <div class="faq-answer">
+                            Check-in is available from 14:00,
+                            while check-out is before 12:00.
+                        </div>
 
-            </div>
+                    </div>
 
 
-            <div class="faq-container">
+                    <div class="faq-item">
 
-                <div class="faq-item">
+                        <button class="faq-question" type="button">
+                            Is breakfast included with the stay?
+                            <span>+</span>
+                        </button>
 
-                    <button class="faq-question">
-                        What time is check-in and check-out?
-                        <span>+</span>
-                    </button>
+                        <div class="faq-answer">
+                            Yes. Breakfast is included with your stay.
+                            from 07:00 AM to 10:00 AM
+                        </div>
 
-                    <div class="faq-answer">
-                        Check-in is available from 14:00,
-                        while check-out is before 12:00.
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            How can I book a stay at Kaiara?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            🔴 [ISI BOOKING METHOD:
+                            WEBSITE / WHATSAPP / OTA]
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            What room types are available?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            🔴 [ISI ROOM TYPES FINAL + LINK KE SECTION STAY
+                            JIKA NANTI DIPERLUKAN]
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            Is parking available?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            🔴 [ISI KEBIJAKAN / KETERSEDIAAN PARKIR]
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            Can outside visitors come to the property?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            🔴 [ISI VISITOR POLICY]
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            What is the cancellation policy?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            🔴 [ISI CANCELLATION / RESCHEDULE POLICY]
+                        </div>
+
                     </div>
 
                 </div>
 
 
-                <div class="faq-item">
+                <!-- =========================
+             CAFÉ FAQ
+        ========================== -->
 
-                    <button class="faq-question">
-                        Is breakfast included?
-                        <span>+</span>
-                    </button>
+                <div class="faq-category" data-faq-content="cafe">
 
-                    <div class="faq-answer">
-                        Yes. Breakfast is included with your stay.
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            What are the café opening hours?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            Kaiara Café is open daily from 07:00 to 20:00,
+                            with last orders at 19:30.
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            Is Kaiara Café open to outside visitors?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            Yes. The café welcomes both staying guests
+                            and outside visitors.
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            Do I need a reservation?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            Walk-ins are welcome, subject to table availability.
+                            Reservations are recommended for larger groups
+                            or when visiting at busier times.
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            How can I reserve a table?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            Table requests can be submitted through our website
+                            and continued via WhatsApp with the Kaiara Café team.
+                            Your reservation is confirmed once you receive
+                            confirmation from our team.
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            Where can I view the menu?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            🔴 [ISI / LINK MENU SETELAH PDF MENU FINAL TERSEDIA]
+                        </div>
+
                     </div>
 
                 </div>
 
 
-                <div class="faq-item">
+                <!-- =========================
+             EVENTS FAQ
+        ========================== -->
 
-                    <button class="faq-question">
-                        Can Kaiara host private events?
-                        <span>+</span>
-                    </button>
+                <div class="faq-category" data-faq-content="events">
 
-                    <div class="faq-answer">
-                        Yes. Kaiara can accommodate selected
-                        intimate gatherings, celebrations,
-                        workshops and retreats.
-                        Please contact us for availability.
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            Can Kaiara host private events?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            Yes. Kaiara welcomes selected intimate gatherings,
+                            celebrations, workshops, and retreats,
+                            subject to availability and event requirements.
+                        </div>
+
                     </div>
 
-                </div>
+
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            What kinds of events can be held at Kaiara?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            Kaiara is suited to intimate gatherings such as
+                            private celebrations, wellness sessions, workshops,
+                            small-scale weddings, and selected community events.
+                            🔴 [SESUAIKAN DENGAN EVENT YANG BENAR-BENAR
+                            MAU KAIARA TERIMA]
+                        </div>
+
+                    </div>
 
 
-                <div class="faq-item">
+                    <div class="faq-item">
 
-                    <button class="faq-question">
-                        How can I make a reservation?
-                        <span>+</span>
-                    </button>
+                        <button class="faq-question" type="button">
+                            Can the property be booked exclusively for an event?
+                            <span>+</span>
+                        </button>
 
-                    <div class="faq-answer">
-                        🔴 [ISI BOOKING METHOD — WHATSAPP /
-                        WEBSITE / OTA / ETC.]
+                        <div class="faq-answer">
+                            🔴 [ISI POLICY FULL PROPERTY / PARTIAL VENUE
+                            UNTUK EVENT]
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            Are food and beverages available for events?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            🔴 [ISI POLICY EVENT F&B / PACKAGE / OUTSIDE CATERING]
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            Can the pool and other facilities be used during an event?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            Access to facilities depends on the event arrangement.
+                            Pool use may be included as part of selected
+                            event arrangements.
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question" type="button">
+                            How can I enquire about hosting an event?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            🔴 [ISI EVENT CONTACT / WHATSAPP /
+                            ENQUIRY METHOD]
+                        </div>
+
                     </div>
 
                 </div>
@@ -1430,6 +1730,128 @@
 
         </section>
 
+        <!-- =========================
+     GUEST NOTES
+========================== -->
+
+        <section class="guest-notes section" id="guest-notes">
+
+            <div class="guest-notes-header">
+
+                <div>
+                    <p class="section-label">
+                        GUEST NOTES
+                    </p>
+
+                    <h2>
+                        Kind words from<br>
+                        our guests.
+                    </h2>
+                </div>
+
+                <p class="guest-notes-intro">
+                    Little notes from those who have
+                    spent some time with us.
+                </p>
+
+            </div>
+
+
+            <div class="guest-notes-slider">
+
+
+                <!-- REVIEW 01 -->
+
+                <article class="guest-note active">
+
+                    <blockquote>
+                        “🔴 [ISI REVIEW TAMU ASLI DI SINI]”
+                    </blockquote>
+
+                    <div class="guest-note-meta">
+
+                        <strong>
+                            🔴 [NAMA TAMU]
+                        </strong>
+
+                        <span>
+                            🔴 [SUMBER REVIEW · BULAN TAHUN]
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- REVIEW 02 -->
+
+                <article class="guest-note">
+
+                    <blockquote>
+                        “🔴 [ISI REVIEW TAMU ASLI DI SINI]”
+                    </blockquote>
+
+                    <div class="guest-note-meta">
+
+                        <strong>
+                            🔴 [NAMA TAMU]
+                        </strong>
+
+                        <span>
+                            🔴 [SUMBER REVIEW · BULAN TAHUN]
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- REVIEW 03 -->
+
+                <article class="guest-note">
+
+                    <blockquote>
+                        “🔴 [ISI REVIEW TAMU ASLI DI SINI]”
+                    </blockquote>
+
+                    <div class="guest-note-meta">
+
+                        <strong>
+                            🔴 [NAMA TAMU]
+                        </strong>
+
+                        <span>
+                            🔴 [SUMBER REVIEW · BULAN TAHUN]
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- NAVIGATION -->
+
+                <div class="guest-notes-navigation">
+
+                    <button class="guest-note-arrow" id="guestNotePrev" type="button" aria-label="Previous guest note">
+                        ←
+                    </button>
+
+                    <div class="guest-note-counter">
+                        <span id="guestNoteCurrent">01</span>
+                        <span class="guest-note-divider">/</span>
+                        <span id="guestNoteTotal">03</span>
+                    </div>
+
+                    <button class="guest-note-arrow" id="guestNoteNext" type="button" aria-label="Next guest note">
+                        →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
 
         <!-- =========================
              BOOKING CTA
@@ -1533,6 +1955,155 @@
         </div>
 
     </footer>
+
+    <!-- =========================
+     ABOUT KAIARA MODAL
+========================== -->
+
+    <div class="about-modal" id="aboutModal" aria-hidden="true">
+
+        <div class="about-modal-backdrop" id="aboutModalBackdrop"></div>
+
+        <div class="about-modal-panel">
+
+            <button class="about-modal-close" id="closeAboutModal" type="button" aria-label="Close our story">
+                ×
+            </button>
+
+            <div class="about-modal-content">
+
+
+                <!-- OUR STORY -->
+
+                <div class="about-story-header">
+
+                    <p class="section-label">
+                        OUR STORY
+                    </p>
+
+                    <h2>
+                        A place made for<br>
+                        unhurried days.
+                    </h2>
+
+                </div>
+
+
+                <div class="about-story">
+
+                    <p class="about-story-lead">
+                        Kaiara Garden began with a simple idea:
+                        to create a place that feels considered,
+                        yet easy to settle into.
+                    </p>
+
+                    <p>
+                        Established in 2026 and tucked into the hills of Dago,
+                        Kaiara brings together restful rooms, greenery,
+                        good food, and spaces to share — all within an
+                        intimate setting designed for days that don't
+                        need to be rushed.
+                    </p>
+
+                    <p>
+                        Here, mornings can unfold slowly. Afternoons might
+                        be spent by the pool, over coffee, or simply doing
+                        very little. And when there is something worth
+                        celebrating, Kaiara becomes a place to gather, too.
+                    </p>
+
+                </div>
+
+
+                <!-- THE GARDEN -->
+
+                <div class="about-detail-section">
+
+                    <p class="about-small-label">
+                        THE GARDEN
+                    </p>
+
+                    <p class="about-detail-text">
+                        Greenery is part of the way Kaiara is meant to feel.
+                        The garden weaves through the stay, creating quiet
+                        corners, softer views, and a sense of openness
+                        throughout the property.
+                    </p>
+
+                </div>
+
+
+                <!-- OUR PHILOSOPHY -->
+
+                <div class="about-detail-section">
+
+                    <p class="about-small-label">
+                        OUR PHILOSOPHY
+                    </p>
+
+                    <p class="about-detail-text">
+                        We believe the best kind of hospitality feels natural —
+                        thoughtful without being formal, comfortable without
+                        asking for too much attention. A place where you can
+                        simply arrive, settle in, and enjoy the day
+                        at your own pace.
+                    </p>
+
+                </div>
+
+
+                <!-- BEHIND THE NAME -->
+
+                <div class="about-detail-section">
+
+                    <p class="about-small-label">
+                        BEHIND THE NAME
+                    </p>
+
+                    <p class="about-detail-text about-placeholder">
+                        🔴 [ISI NANTI: ceritakan arti atau asal nama
+                        “Kaiara”, serta alasan nama ini dipilih.]
+                    </p>
+
+                </div>
+
+
+                <!-- ESTABLISHED -->
+
+                <div class="about-established">
+
+                    <span>
+                        ESTABLISHED
+                    </span>
+
+                    <strong>
+                        Bandung · 2026
+                    </strong>
+
+                </div>
+
+
+                <!-- CLOSING -->
+
+                <div class="about-closing">
+
+                    <p>
+                        A place to stay awhile, share a moment,
+                        and simply unwind.
+                    </p>
+
+                    <span>
+                        STAY · DINE · GATHER · UNWIND
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
 
     <script src="script.js"></script>
 

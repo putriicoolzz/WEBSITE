@@ -152,10 +152,27 @@ p {
     margin-bottom: 55px;
 }
 
-.section-heading > p {
+.section-heading>p {
     max-width: 350px;
 }
 
+/* =====================================================
+   SECTION SCROLL OFFSET
+===================================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+#about,
+#stay,
+#cafe,
+#experience,
+#gallery,
+#location,
+#booking {
+    scroll-margin-top: 82px;
+}
 
 /* =====================================================
    3. NAVBAR
@@ -199,18 +216,33 @@ p {
     display: flex;
     gap: 34px;
 }
+
 /* Hide mobile booking button on desktop */
 .mobile-book {
     display: none;
 }
 
-.nav-menu a {
+.nav-menu .nav-link {
+    position: relative;
+
     font-size: 13px;
+    font-weight: 400;
+
     color: var(--text);
-    transition: 0.3s ease;
+
+    transition:
+        color 0.3s ease,
+        opacity 0.3s ease;
 }
 
-.nav-menu a:hover {
+.nav-menu .nav-link:hover {
+    color: var(--kaiara-green);
+}
+
+
+/* ACTIVE NAVIGATION */
+
+.nav-menu .nav-link.active {
     color: var(--kaiara-green);
 }
 
@@ -265,7 +297,7 @@ p {
 }
 
 .btn-outline {
-    border: 1px solid rgba(255,255,255,0.7);
+    border: 1px solid rgba(255, 255, 255, 0.7);
     color: white;
 }
 
@@ -304,10 +336,8 @@ p {
     position: relative;
 
     background:
-        linear-gradient(
-            rgba(32, 38, 31, 0.35),
-            rgba(32, 38, 31, 0.48)
-        ),
+        linear-gradient(rgba(32, 38, 31, 0.35),
+            rgba(32, 38, 31, 0.48)),
         url("images/hero.jpg");
 
     background-size: cover;
@@ -322,11 +352,9 @@ p {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        90deg,
-        rgba(20, 25, 20, 0.5),
-        transparent 70%
-    );
+    background: linear-gradient(90deg,
+            rgba(20, 25, 20, 0.5),
+            transparent 70%);
 }
 
 .hero-content {
@@ -342,7 +370,7 @@ p {
     font-size: 11px;
     letter-spacing: 3px;
     margin-bottom: 25px;
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .hero h1 {
@@ -352,7 +380,7 @@ p {
 
 .hero-text {
     max-width: 560px;
-    color: rgba(255,255,255,0.88);
+    color: rgba(255, 255, 255, 0.88);
     font-size: 17px;
     line-height: 1.8;
 }
@@ -363,32 +391,88 @@ p {
     margin-top: 35px;
 }
 
+/* HERO SECONDARY CTA */
+
+.hero-explore-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    width: fit-content;
+
+    padding-bottom: 5px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.65);
+
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+
+    color: rgba(255, 255, 255, 0.92);
+
+    transition:
+        color 0.3s ease,
+        border-color 0.3s ease,
+        opacity 0.3s ease;
+}
+
+.hero-explore-link span {
+    font-size: 15px;
+
+    transition: transform 0.3s ease;
+}
+
+.hero-explore-link:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.hero-explore-link:hover span {
+    transform: translateX(4px);
+}
+
+/* HERO SCROLL INDICATOR */
+
 .scroll-indicator {
     position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+
+    right: max(7vw, 40px);
+    bottom: 34px;
+
+    z-index: 2;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
 
-    color: rgba(255,255,255,0.8);
     text-decoration: none;
     cursor: pointer;
 }
 
-.scroll-indicator div {
-    height: 35px;
-    width: 1px;
-    background: rgba(255,255,255,0.6);
-    margin-top: 10px;
+.scroll-indicator span {
+    display: block;
+
+    white-space: nowrap;
+
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 1;
+
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
 }
 
+.scroll-indicator div {
+    width: 1px;
+    height: 32px;
+
+    margin-top: 12px;
+
+    background: rgba(255, 255, 255, 0.55);
+}
 
 /* =====================================================
    6. INTRO
@@ -432,6 +516,40 @@ p {
     opacity: 0.6;
 }
 
+/* =========================
+   INTRO LINKS
+========================= */
+
+.intro-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.intro-story-link {
+    padding: 0 0 4px;
+    margin-top: 12px;
+
+    border: none;
+    border-bottom: 1px solid var(--dark-green);
+    background: none;
+
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: inherit;
+
+    color: var(--dark-green);
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.intro-story-link:hover {
+    opacity: 0.6;
+}
 
 /* =====================================================
    7. ROOMS
@@ -461,11 +579,9 @@ p {
 
 .placeholder-image {
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #d8d2c5,
-            #b9b5a8
-        );
+            #b9b5a8);
 
     display: flex;
     align-items: center;
@@ -493,7 +609,7 @@ p {
     margin-bottom: 14px;
 }
 
-.room-info > p:not(.room-type) {
+.room-info>p:not(.room-type) {
     font-size: 14px;
 }
 
@@ -543,12 +659,16 @@ p {
 ===================================================== */
 
 .facilities .section-heading {
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 60px;
+
     margin-bottom: 55px;
     text-align: left;
 }
 
-.facilities .section-heading > div {
+.facilities .section-heading>div {
     width: 100%;
 }
 
@@ -557,8 +677,9 @@ p {
 }
 
 .facilities-intro {
-    max-width: 520px;
-    margin: 24px 0 0;
+    max-width: 350px;
+    margin: 0;
+
     font-size: 15px;
     line-height: 1.8;
     color: var(--muted);
@@ -824,7 +945,7 @@ p {
     margin-bottom: 25px;
 }
 
-.experience-content > p:not(.section-label) {
+.experience-content>p:not(.section-label) {
     max-width: 500px;
 }
 
@@ -880,6 +1001,15 @@ p {
 
 .cafe-content p {
     margin-bottom: 20px;
+}
+
+.cafe-content>p:not(.section-label) {
+    max-width: 500px;
+
+    font-size: 15px;
+    line-height: 1.8;
+
+    color: var(--muted);
 }
 
 .cafe-image {
@@ -945,7 +1075,7 @@ p {
     margin-bottom: 25px;
 }
 
-.location-grid > div:first-child > p:not(.section-label) {
+.location-grid>div:first-child>p:not(.section-label) {
     max-width: 500px;
 }
 
@@ -967,11 +1097,9 @@ p {
     min-height: 480px;
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #d7d3c8,
-            #bbb9af
-        );
+            #bbb9af);
 
     display: flex;
     align-items: center;
@@ -986,37 +1114,170 @@ p {
    13. FAQ
 ===================================================== */
 
+/* =====================================================
+   FAQ
+===================================================== */
+
 .faq {
+    width: 100%;
+    max-width: none;
+
     background: var(--cream);
 }
 
-.faq-container {
-    max-width: 800px;
-    margin: auto;
-
-    border-top: 1px solid var(--border);
+.faq-inner {
+    margin: 0 auto;
 }
+
+
+/* HEADER */
+
+.faq-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 60px;
+
+    max-width: none;
+    margin: 0 0 55px;
+
+    text-align: left;
+}
+
+.faq-heading h2 {
+    margin: 0;
+
+    color: var(--dark-green);
+}
+
+.faq-intro {
+    max-width: 350px;
+
+    margin: 0 0 7px;
+
+    font-size: 14px;
+    line-height: 1.8;
+
+    color: var(--muted);
+}
+
+
+/* =====================================================
+   FAQ TABS
+===================================================== */
+
+.faq-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 34px;
+
+    margin-bottom: 48px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.faq-tab {
+    position: relative;
+
+    padding: 0 2px 15px;
+
+    border: none;
+    background: transparent;
+
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+
+    color: var(--muted);
+
+    cursor: pointer;
+
+    transition: color 0.25s ease;
+}
+
+.faq-tab::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+
+    height: 1px;
+
+    background: var(--dark-green);
+
+    transform: scaleX(0);
+
+    transition: transform 0.25s ease;
+}
+
+.faq-tab:hover,
+.faq-tab.active {
+    color: var(--dark-green);
+}
+
+.faq-tab.active::after {
+    transform: scaleX(1);
+}
+
+
+/* =====================================================
+   FAQ CATEGORIES
+===================================================== */
+
+.faq-category {
+    display: none;
+
+    max-width: 760px;
+
+    margin: 0 auto;
+}
+
+.faq-category.active {
+    display: block;
+}
+
+
+/* FAQ ITEM */
 
 .faq-item {
     border-bottom: 1px solid var(--border);
 }
 
+.faq-item:first-child {
+    border-top: 1px solid var(--border);
+}
+
+
+/* QUESTION */
+
 .faq-question {
     width: 100%;
 
-    background: none;
-    border: none;
-
-    padding: 25px 0;
-
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding: 23px 0;
+
+    border: none;
+    background: transparent;
 
     text-align: left;
 
     font-family: var(--serif);
-    font-size: 24px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.35;
 
     color: var(--dark-green);
 
@@ -1024,30 +1285,414 @@ p {
 }
 
 .faq-question span {
+    flex: 0 0 auto;
+
     font-family: var(--sans);
-    font-size: 20px;
-    transition: 0.3s ease;
-}
+    font-size: 16px;
+    font-weight: 300;
 
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-
-    font-size: 14px;
-    color: var(--muted);
-
-    transition: max-height 0.4s ease, padding 0.4s ease;
-}
-
-.faq-item.active .faq-answer {
-    max-height: 200px;
-    padding-bottom: 25px;
+    transition: transform 0.3s ease;
 }
 
 .faq-item.active .faq-question span {
     transform: rotate(45deg);
 }
 
+
+/* ANSWER */
+
+.faq-answer {
+    max-height: 0;
+
+    overflow: hidden;
+
+    padding-right: 60px;
+
+    font-size: 13px;
+    line-height: 1.85;
+
+    color: var(--muted);
+
+    opacity: 0;
+
+    transition:
+        max-height 0.4s ease,
+        opacity 0.3s ease,
+        padding 0.4s ease;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 280px;
+
+    padding-bottom: 24px;
+
+    opacity: 1;
+}
+
+
+/* =====================================================
+   FAQ — MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .faq-heading {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 25px;
+
+        margin-bottom: 40px;
+    }
+
+    .faq-heading h2 {
+        font-size: 43px;
+    }
+
+    .faq-intro {
+        max-width: 300px;
+
+        margin: 0;
+
+        font-size: 13px;
+        line-height: 1.75;
+    }
+
+    .faq-tabs {
+        justify-content: flex-start;
+
+        gap: 26px;
+
+        margin-bottom: 35px;
+
+        overflow-x: auto;
+
+        scrollbar-width: none;
+    }
+
+    .faq-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .faq-tab {
+        flex: 0 0 auto;
+
+        padding-bottom: 13px;
+    }
+
+    .faq-question {
+        gap: 20px;
+
+        padding: 20px 0;
+
+        font-size: 18px;
+    }
+
+    .faq-answer {
+        padding-right: 25px;
+
+        font-size: 13px;
+    }
+
+}
+
+/* =====================================================
+   GUEST NOTES
+===================================================== */
+
+.guest-notes {
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
+
+/* HEADER */
+
+.guest-notes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 60px;
+
+    margin-bottom: 65px;
+}
+
+.guest-notes-header h2 {
+    margin: 0;
+
+    color: var(--dark-green);
+}
+
+.guest-notes-intro {
+    max-width: 300px;
+
+    margin: 0 0 7px;
+
+    font-size: 14px;
+    line-height: 1.8;
+
+    color: var(--muted);
+}
+
+
+/* =====================================================
+   REVIEW AREA
+===================================================== */
+
+.guest-notes-slider {
+    position: relative;
+
+    padding: 52px 0 0;
+
+    border-top: 1px solid var(--border);
+}
+
+
+/* INDIVIDUAL REVIEW */
+
+.guest-note {
+    display: none;
+
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+.guest-note.active {
+    display: block;
+}
+
+
+/* REVIEW TEXT */
+
+.guest-note blockquote {
+    max-width: 760px;
+
+    margin: 0 auto;
+    padding: 0;
+
+    border: none;
+
+    font-family: var(--serif);
+    font-size: clamp(28px, 2.7vw, 38px);
+    font-weight: 400;
+    line-height: 1.42;
+
+    color: var(--dark-green);
+}
+
+
+/* GUEST INFORMATION */
+
+.guest-note-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 38px;
+}
+
+.guest-note-meta strong {
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: 0.08em;
+
+    color: var(--text);
+}
+
+.guest-note-meta span {
+    font-size: 9px;
+    font-weight: 500;
+
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+
+    color: var(--kaiara-gold);
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.guest-notes-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 22px;
+
+    margin-top: 52px;
+}
+
+
+/* ARROWS */
+
+.guest-note-arrow {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid var(--border);
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: var(--dark-green);
+
+    font-family: var(--sans);
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.guest-note-arrow:hover {
+    background: var(--cream);
+    border-color: rgba(48, 56, 47, 0.3);
+}
+
+#guestNotePrev:hover {
+    transform: translateX(-2px);
+}
+
+#guestNoteNext:hover {
+    transform: translateX(2px);
+}
+
+
+/* COUNTER */
+
+.guest-note-counter {
+    min-width: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+
+    color: var(--muted);
+}
+
+.guest-note-divider {
+    opacity: 0.45;
+}
+
+
+/* =====================================================
+   GUEST NOTES — TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .guest-notes {
+        padding-top: 95px;
+        padding-bottom: 95px;
+    }
+
+    .guest-notes-header {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 25px;
+
+        margin-bottom: 50px;
+    }
+
+    .guest-notes-intro {
+        max-width: 400px;
+    }
+
+    .guest-notes-slider {
+        padding-top: 50px;
+    }
+
+}
+
+
+.scroll-indicator {
+    right: 22px;
+    bottom: 24px;
+}
+
+.scroll-indicator span {
+    display: none;
+}
+
+.scroll-indicator div {
+    height: 28px;
+    margin-top: 0;
+}
+
+/* =====================================================
+   GUEST NOTES — MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .guest-notes {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    .guest-notes-header {
+        margin-bottom: 40px;
+    }
+
+    .guest-notes-header h2 {
+        font-size: 43px;
+    }
+
+    .guest-notes-intro {
+        max-width: 280px;
+
+        font-size: 13px;
+        line-height: 1.75;
+    }
+
+    .guest-notes-slider {
+        padding-top: 42px;
+    }
+
+    .guest-note blockquote {
+        font-size: 28px;
+        line-height: 1.4;
+    }
+
+    .guest-note-meta {
+        margin-top: 30px;
+    }
+
+    .guest-notes-navigation {
+        margin-top: 40px;
+    }
+
+    .guest-note-arrow {
+        width: 40px;
+        height: 40px;
+    }
+
+}
 
 /* =====================================================
    14. BOOKING CTA
@@ -1059,10 +1704,8 @@ p {
     position: relative;
 
     background:
-        linear-gradient(
-            rgba(40, 48, 39, 0.55),
-            rgba(40, 48, 39, 0.65)
-        ),
+        linear-gradient(rgba(40, 48, 39, 0.55),
+            rgba(40, 48, 39, 0.65)),
         url("images/booking.jpg");
 
     background-size: cover;
@@ -1081,7 +1724,7 @@ p {
 }
 
 .booking-content .section-label {
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .booking-content h2 {
@@ -1090,7 +1733,7 @@ p {
 }
 
 .booking-content p:not(.section-label) {
-    color: rgba(255,255,255,0.85);
+    color: rgba(255, 255, 255, 0.85);
     margin: 15px 0 30px;
 }
 
@@ -1128,7 +1771,7 @@ p {
 
 .footer p {
     margin-top: 25px;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
     font-size: 13px;
 }
 
@@ -1140,10 +1783,10 @@ p {
     margin-bottom: 20px;
 }
 
-.footer-grid > div:not(:first-child) a {
+.footer-grid>div:not(:first-child) a {
     display: block;
 
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
     font-size: 13px;
 
     margin-bottom: 8px;
@@ -1151,7 +1794,7 @@ p {
     transition: 0.3s ease;
 }
 
-.footer-grid > div:not(:first-child) a:hover {
+.footer-grid>div:not(:first-child) a:hover {
     color: white;
 }
 
@@ -1186,10 +1829,10 @@ p {
     }
 
     .logo img {
-    height: 58px;
-    width: auto;
+        height: 58px;
+        width: auto;
     }
-    
+
     .nav-menu {
         position: absolute;
         top: 70px;
@@ -1207,30 +1850,31 @@ p {
     .nav-menu.active {
         display: flex;
         border-bottom: 1px solid var(--border);
-}
+    }
 
     .nav-menu a {
         padding: 15px 25px;
         border-bottom: 1px solid var(--border);
     }
+
     .nav-menu .mobile-book {
-    display: block !important;
-    margin: 16px 22px 20px;
-    padding: 14px 20px;
+        display: block !important;
+        margin: 16px 22px 20px;
+        padding: 14px 20px;
 
-    background: var(--kaiara-green);
-    color: var(--warm-white);
+        background: var(--kaiara-green);
+        color: var(--warm-white);
 
-    text-align: center;
-    font-size: 12px;
-    letter-spacing: 1px;
-    border-bottom: none;
-}
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: 1px;
+        border-bottom: none;
+    }
 
     .nav-menu .mobile-book:hover {
-    background: var(--kaiara-brown);
-    color: var(--warm-white);
-}
+        background: var(--kaiara-brown);
+        color: var(--warm-white);
+    }
 
     .nav-book {
         display: none;
@@ -1274,6 +1918,64 @@ p {
         gap: 45px;
     }
 
+/* =====================================================
+   FACILITIES — TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .facilities .section-heading {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 26px;
+        margin-bottom: 50px;
+    }
+
+    .facilities .section-heading > div {
+        width: 100%;
+    }
+
+    .facilities-intro {
+        width: 100%;
+        max-width: 520px;
+        margin: 0;
+    }
+
+    .facility-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .facility {
+        min-height: 210px;
+        padding: 30px;
+    }
+
+}
+
+    /* CAFÉ MOBILE LAYOUT */
+
+    .cafe-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 38px;
+    }
+
+    .cafe-image {
+        order: 1;
+        width: 100%;
+        max-width: none;
+        min-height: 0;
+        height: auto;
+        aspect-ratio: 4 / 3;
+    }
+
+    .cafe-content {
+        order: 2;
+        width: 100%;
+        max-width: none;
+    }
+
     .room-grid {
         grid-template-columns: 1fr;
     }
@@ -1309,7 +2011,7 @@ p {
         gap: 45px;
     }
 
-    .footer-grid > div:first-child {
+    .footer-grid>div:first-child {
         grid-column: 1 / -1;
     }
 
@@ -1369,10 +2071,11 @@ p {
         grid-template-columns: 1fr;
     }
 
-    .footer-grid > div:first-child {
+    .footer-grid>div:first-child {
         grid-column: auto;
     }
 }
+
 /* =====================================================
    18. SCROLL REVEAL
 ===================================================== */
@@ -1641,8 +2344,8 @@ body.loaded {
         height: 280px;
     }
 
-    .desktop-break{
-        display:none;
+    .desktop-break {
+        display: none;
     }
 }
 
@@ -1804,11 +2507,11 @@ body.loaded {
     background: rgba(25, 32, 26, 0.14);
 }
 
-.gallery-photo > span {
+.gallery-photo>span {
     transition: transform 0.45s ease;
 }
 
-.gallery-photo:hover > span {
+.gallery-photo:hover>span {
     transform: scale(1.025);
 }
 
@@ -1929,7 +2632,7 @@ body.loaded {
     gap: 30px;
 }
 
-.room-spec-grid > div {
+.room-spec-grid>div {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -2234,7 +2937,7 @@ body.room-modal-open {
 .fullscreen-gallery-caption {
     margin-top: 18px;
 
-    color: rgba(255,255,255,0.82);
+    color: rgba(255, 255, 255, 0.82);
 
     font-size: 11px;
     letter-spacing: 1.5px;
@@ -2252,7 +2955,7 @@ body.room-modal-open {
     width: 48px;
     height: 48px;
 
-    border: 1px solid rgba(255,255,255,0.25);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 50%;
 
     background: transparent;
@@ -2269,7 +2972,7 @@ body.room-modal-open {
 }
 
 .fullscreen-gallery-close:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     transform: rotate(90deg);
 }
 
@@ -2283,7 +2986,7 @@ body.room-modal-open {
 
     transform: translateX(-50%);
 
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
 
     font-size: 11px;
     letter-spacing: 2px;
@@ -2304,7 +3007,7 @@ body.room-modal-open {
     border: none;
     border-radius: 50%;
 
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.08);
     color: white;
 
     font-size: 38px;
@@ -2318,7 +3021,7 @@ body.room-modal-open {
 }
 
 .fullscreen-gallery-arrow:hover {
-    background: rgba(255,255,255,0.16);
+    background: rgba(255, 255, 255, 0.16);
 }
 
 .fullscreen-gallery-prev {
@@ -2351,7 +3054,7 @@ body.room-modal-open {
     border: none;
     border-radius: 50%;
 
-    background: rgba(255,255,255,0.35);
+    background: rgba(255, 255, 255, 0.35);
 
     cursor: pointer;
 
@@ -2395,7 +3098,7 @@ body.room-modal-open {
 
         font-size: 30px;
 
-        background: rgba(0,0,0,0.25);
+        background: rgba(0, 0, 0, 0.25);
     }
 
     .fullscreen-gallery-close {
@@ -2409,6 +3112,417 @@ body.room-modal-open {
     .fullscreen-gallery-counter {
         top: 34px;
     }
+}
+
+/* =====================================================
+   ABOUT KAIARA MODAL
+===================================================== */
+
+.about-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 38px;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+}
+
+.about-modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* BACKDROP */
+
+.about-modal-backdrop {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(28, 33, 28, 0.62);
+    backdrop-filter: blur(5px);
+}
+
+
+/* PANEL */
+
+.about-modal-panel {
+    position: relative;
+    z-index: 1;
+
+    width: min(840px, 92vw);
+    max-height: calc(100vh - 76px);
+
+    overflow-y: auto;
+
+    background: var(--warm-white);
+
+    box-shadow:
+        0 30px 90px rgba(25, 30, 25, 0.20);
+
+    transform: translateY(16px);
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(48, 56, 47, 0.25) transparent;
+
+    transition: transform 0.4s ease;
+}
+
+.about-modal.active .about-modal-panel {
+    transform: translateY(0);
+}
+
+
+/* CLOSE BUTTON */
+
+.about-modal-close {
+    position: sticky;
+    top: 22px;
+
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    margin-left: auto;
+    margin-right: 22px;
+    margin-bottom: -42px;
+
+    padding: 0;
+
+    border: 1px solid rgba(48, 56, 47, 0.12);
+    border-radius: 50%;
+
+    background: rgba(250, 249, 245, 0.94);
+    color: var(--dark-green);
+
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+.about-modal-close:hover {
+    transform: rotate(90deg);
+    background: var(--cream);
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.about-modal-content {
+    padding: 72px 76px 66px;
+}
+
+
+/* HEADER */
+
+.about-story-header .section-label {
+    margin-bottom: 20px;
+}
+
+.about-story-header h2 {
+    max-width: 600px;
+
+    margin: 0;
+
+    font-size: clamp(45px, 4.2vw, 58px);
+    line-height: 1.04;
+
+    color: var(--dark-green);
+}
+
+
+/* =====================================================
+   MAIN STORY
+===================================================== */
+
+.about-story {
+    max-width: 620px;
+
+    margin-top: 40px;
+    padding-top: 34px;
+
+    border-top: 1px solid var(--border);
+}
+
+.about-story p {
+    max-width: 590px;
+
+    margin: 0 0 20px;
+
+    font-size: 13px;
+    line-height: 1.9;
+
+    color: var(--muted);
+}
+
+.about-story .about-story-lead {
+    max-width: 590px;
+
+    margin-bottom: 25px;
+
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.5;
+
+    color: var(--text);
+}
+
+
+/* =====================================================
+   STORY DETAIL SECTIONS
+===================================================== */
+
+.about-detail-section {
+    max-width: 620px;
+
+    margin-top: 38px;
+    padding-top: 28px;
+
+    border-top: 1px solid var(--border);
+}
+
+.about-small-label {
+    margin: 0 0 15px;
+
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.4;
+
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+
+    color: var(--kaiara-gold);
+}
+
+.about-detail-text {
+    max-width: 570px;
+
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.9;
+
+    color: var(--muted);
+}
+
+
+/* PLACEHOLDER — TEMPORARY */
+
+.about-placeholder {
+    padding: 16px 18px;
+
+    background: var(--cream);
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   ESTABLISHED
+===================================================== */
+
+.about-established {
+    margin-top: 42px;
+    padding: 26px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.about-established span {
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 0.2em;
+
+    color: var(--kaiara-gold);
+}
+
+.about-established strong {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+
+    color: var(--dark-green);
+}
+
+
+/* =====================================================
+   CLOSING
+===================================================== */
+
+.about-closing {
+    margin-top: 42px;
+}
+
+.about-closing p {
+    max-width: 500px;
+
+    margin: 0;
+
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.45;
+
+    color: var(--dark-green);
+}
+
+.about-closing span {
+    display: block;
+
+    margin-top: 25px;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 0.22em;
+
+    color: var(--kaiara-gold);
+}
+
+
+/* PREVENT BACKGROUND SCROLL */
+
+body.about-modal-open {
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   ABOUT MODAL — TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .about-modal {
+        padding: 24px;
+    }
+
+    .about-modal-panel {
+        width: min(760px, 100%);
+        max-height: calc(100vh - 48px);
+    }
+
+    .about-modal-content {
+        padding: 70px 50px 58px;
+    }
+
+    .about-story-header h2 {
+        font-size: 50px;
+    }
+
+}
+
+
+/* =====================================================
+   ABOUT MODAL — MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .about-modal {
+        padding: 0;
+        align-items: stretch;
+    }
+
+    .about-modal-panel {
+        width: 100%;
+        max-height: 100vh;
+        min-height: 100vh;
+    }
+
+    .about-modal-close {
+        top: 18px;
+
+        width: 40px;
+        height: 40px;
+
+        margin-right: 18px;
+        margin-bottom: -40px;
+
+        font-size: 24px;
+    }
+
+    .about-modal-content {
+        padding: 78px 24px 52px;
+    }
+
+    .about-story-header h2 {
+        font-size: 43px;
+    }
+
+    .about-story {
+        margin-top: 34px;
+        padding-top: 28px;
+    }
+
+    .about-story .about-story-lead {
+        font-size: 21px;
+    }
+
+    .about-detail-section {
+        margin-top: 32px;
+        padding-top: 25px;
+    }
+
+    .about-established {
+        margin-top: 34px;
+        padding: 22px 0;
+
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 7px;
+    }
+
+    .about-established strong {
+        font-size: 19px;
+    }
+
+    .about-closing {
+        margin-top: 34px;
+    }
+
+    .about-closing p {
+        font-size: 22px;
+    }
+
+    .about-closing span {
+        line-height: 1.8;
+    }
+
 }
 
 /* =====================================================
@@ -2476,8 +3590,7 @@ body.room-modal-open {
 
     scrollbar-width: thin;
     scrollbar-color:
-        rgba(47, 57, 48, 0.35)
-        transparent;
+        rgba(47, 57, 48, 0.35) transparent;
 }
 
 
@@ -2797,8 +3910,7 @@ body.cafe-modal-open {
 
     scrollbar-width: thin;
     scrollbar-color:
-        rgba(47, 57, 48, 0.35)
-        transparent;
+        rgba(47, 57, 48, 0.35) transparent;
 }
 
 
@@ -2898,7 +4010,7 @@ body.cafe-modal-open {
     color: var(--dark-green);
 }
 
-.cafe-reservation-header > p:not(.section-label) {
+.cafe-reservation-header>p:not(.section-label) {
     margin-top: 20px;
 
     font-size: 14px;
@@ -2989,16 +4101,12 @@ body.cafe-modal-open {
     padding-right: 28px;
 
     background-image:
-        linear-gradient(
-            45deg,
+        linear-gradient(45deg,
             transparent 50%,
-            var(--dark-green) 50%
-        ),
-        linear-gradient(
-            135deg,
+            var(--dark-green) 50%),
+        linear-gradient(135deg,
             var(--dark-green) 50%,
-            transparent 50%
-        );
+            transparent 50%);
 
     background-position:
         calc(100% - 9px) 50%,
@@ -3155,8 +4263,7 @@ body.cafe-reservation-open {
 
     scrollbar-width: thin;
     scrollbar-color:
-        rgba(47, 57, 48, 0.35)
-        transparent;
+        rgba(47, 57, 48, 0.35) transparent;
 }
 
 
