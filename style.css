@@ -2126,17 +2126,6 @@ html {
 
 
     /* =========================
-       LOCATION
-    ========================= */
-
-    .map-placeholder {
-        width: 100%;
-        min-width: 0;
-        min-height: 540px;
-    }
-
-
-    /* =========================
        FOOTER
     ========================= */
 
@@ -4982,7 +4971,15 @@ body.facility-modal-open {
    LOCATION MAP — SMALL MOBILE
 ===================================================== */
 
+/* =====================================================
+   LOCATION MAP — SMALL MOBILE
+===================================================== */
+
 @media (max-width: 520px) {
+
+    .location {
+        padding-bottom: 140px;
+    }
 
     .map-placeholder,
     .map-container {
