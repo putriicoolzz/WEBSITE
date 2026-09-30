@@ -218,7 +218,8 @@ html {
 }
 
 /* Hide mobile booking button on desktop */
-.mobile-book {
+.mobile-book,
+.mobile-extra-link {
     display: none;
 }
 
@@ -1122,7 +1123,7 @@ html {
     width: 100%;
     max-width: none;
 
-    background: var(--cream);
+    background: var(--warm-white);
 }
 
 .faq-inner {
@@ -1401,8 +1402,15 @@ html {
 ===================================================== */
 
 .guest-notes {
+    max-width: none;
+
     padding-top: 120px;
     padding-bottom: 120px;
+
+    padding-left: max(30px, calc((100vw - 1180px) / 2));
+    padding-right: max(30px, calc((100vw - 1180px) / 2));
+
+    background: var(--cream);
 }
 
 
@@ -1835,7 +1843,7 @@ html {
         text-align: left;
     }
 
-    .facilities .section-heading > div {
+    .facilities .section-heading>div {
         width: 100%;
     }
 
@@ -1904,6 +1912,18 @@ html {
 
     .nav-menu a {
         padding: 15px 25px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-extra-link {
+        display: block;
+
+        padding: 15px 25px;
+
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--text);
+
         border-bottom: 1px solid var(--border);
     }
 
@@ -1997,9 +2017,9 @@ html {
         gap: 45px;
     }
 
-    .intro-grid > *,
-    .experience-grid > *,
-    .location-grid > * {
+    .intro-grid>*,
+    .experience-grid>*,
+    .location-grid>* {
         min-width: 0;
     }
 
@@ -2086,13 +2106,10 @@ html {
 
     .gallery-grid {
         grid-template-columns:
-            minmax(0, 1fr)
-            minmax(0, 1fr);
+            minmax(0, 1fr) minmax(0, 1fr);
 
         grid-template-rows:
-            220px
-            220px
-            220px;
+            220px 220px 220px;
     }
 
     .gallery-large {
@@ -2121,17 +2138,16 @@ html {
 
     .footer-grid {
         grid-template-columns:
-            minmax(0, 1fr)
-            minmax(0, 1fr);
+            minmax(0, 1fr) minmax(0, 1fr);
 
         gap: 45px;
     }
 
-    .footer-grid > div {
+    .footer-grid>div {
         min-width: 0;
     }
 
-    .footer-grid > div:first-child {
+    .footer-grid>div:first-child {
         grid-column: 1 / -1;
     }
 
@@ -2231,7 +2247,7 @@ html {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .footer-grid > div:first-child {
+    .footer-grid>div:first-child {
         grid-column: auto;
     }
 
@@ -4895,7 +4911,7 @@ body.facility-modal-open {
     min-width: 0;
 }
 
-.location-grid > * {
+.location-grid>* {
     min-width: 0;
 }
 
