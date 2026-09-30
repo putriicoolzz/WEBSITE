@@ -2423,6 +2423,29 @@
 
     </script>
 
+<!-- TEMPORARY ANDROID VIEWPORT TEST -->
+<script>
+    window.addEventListener("load", function () {
+        const info = document.createElement("div");
+
+        info.style.position = "fixed";
+        info.style.left = "5px";
+        info.style.bottom = "5px";
+        info.style.zIndex = "999999";
+        info.style.background = "black";
+        info.style.color = "white";
+        info.style.padding = "6px 8px";
+        info.style.fontSize = "11px";
+
+        info.textContent =
+            "inner: " + window.innerWidth +
+            " | client: " + document.documentElement.clientWidth +
+            " | scroll: " + document.documentElement.scrollWidth;
+
+        document.body.appendChild(info);
+    });
+</script>
+
 </body>
 
 </html>
