@@ -2095,6 +2095,9 @@ showGuestNote(0);
 const navbarLinks =
     document.querySelectorAll(".nav-link");
 
+const mobileExtraLinks =
+    document.querySelectorAll(".mobile-extra-link");
+
 const navSections = [
     {
         nav: "about",
@@ -2121,6 +2124,18 @@ const navSections = [
     {
         nav: "location",
         element: document.getElementById("location")
+    },
+    {
+        nav: "guest-notes",
+        element: document.getElementById("guest-notes")
+    },
+    {
+        nav: "faq",
+        element: document.getElementById("faq")
+    },
+    {
+        nav: null,
+        element: document.getElementById("booking")
     }
 ];
 
@@ -2132,6 +2147,18 @@ function setActiveNav(navName) {
         link.classList.toggle(
             "active",
             link.dataset.nav === navName
+        );
+
+    });
+
+    mobileExtraLinks.forEach(link => {
+
+        const target =
+            link.getAttribute("href");
+
+        link.classList.toggle(
+            "active",
+            target === `#${navName}`
         );
 
     });
@@ -2154,7 +2181,6 @@ function updateActiveNav() {
     let currentNav = "about";
     let closestSectionTop = -Infinity;
 
-
     navSections.forEach(section => {
 
         if (!section.element) return;
@@ -2174,7 +2200,6 @@ function updateActiveNav() {
 
     });
 
-
     setActiveNav(currentNav);
 
 }
@@ -2186,11 +2211,9 @@ window.addEventListener(
     { passive: true }
 );
 
-
 window.addEventListener(
     "resize",
     updateActiveNav
 );
-
 
 updateActiveNav();
