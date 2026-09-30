@@ -1927,6 +1927,10 @@ html {
         border-bottom: 1px solid var(--border);
     }
 
+    .mobile-extra-link.active {
+        color: var(--kaiara-green);
+    }
+
     .nav-menu .mobile-book {
         display: block !important;
 
@@ -2219,6 +2223,18 @@ html {
 
     .facility-grid {
         grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* GALLERY HEADING */
+
+    .gallery .section-heading.centered {
+        text-align: left;
+    }
+
+    .gallery .section-heading.centered .section-label,
+    .gallery .section-heading.centered h2 {
+        width: 100%;
+        text-align: left;
     }
 
 
