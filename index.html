@@ -2423,28 +2423,30 @@
 
     </script>
 
-<!-- TEMPORARY ANDROID VIEWPORT TEST -->
-<script>
-    window.addEventListener("load", function () {
-        const info = document.createElement("div");
+/* =====================================================
+   TEMPORARY ANDROID OVERFLOW DEBUG
+===================================================== */
 
-        info.style.position = "fixed";
-        info.style.left = "5px";
-        info.style.bottom = "5px";
-        info.style.zIndex = "999999";
-        info.style.background = "black";
-        info.style.color = "white";
-        info.style.padding = "6px 8px";
-        info.style.fontSize = "11px";
+html,
+body {
+    max-width: 100%;
+}
 
-        info.textContent =
-            "inner: " + window.innerWidth +
-            " | client: " + document.documentElement.clientWidth +
-            " | scroll: " + document.documentElement.scrollWidth;
+body * {
+    outline: 1px solid rgba(255, 0, 0, 0.12);
+}
 
-        document.body.appendChild(info);
-    });
-</script>
+@media (max-width: 850px) {
+
+    .navbar,
+    .hero,
+    main,
+    section,
+    footer {
+        max-width: 100%;
+    }
+
+}
 
 </body>
 

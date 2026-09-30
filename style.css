@@ -4886,3 +4886,75 @@ body.facility-modal-open {
     }
 
 }
+
+/* =====================================================
+   LOCATION MAP — RESPONSIVE FIX
+===================================================== */
+
+.location-grid {
+    min-width: 0;
+}
+
+.location-grid > * {
+    min-width: 0;
+}
+
+.location iframe,
+.map-placeholder iframe,
+.map-container iframe {
+    display: block;
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+    border: 0;
+}
+
+
+/* =====================================================
+   LOCATION MAP — MOBILE
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .location-grid {
+        grid-template-columns: minmax(0, 1fr);
+        width: 100%;
+        gap: 40px;
+    }
+
+    .map-placeholder,
+    .map-container {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        min-height: 0;
+        height: 340px;
+
+        overflow: hidden;
+    }
+
+    .location iframe,
+    .map-placeholder iframe,
+    .map-container iframe {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100% !important;
+    }
+
+}
+
+
+/* =====================================================
+   LOCATION MAP — SMALL MOBILE
+===================================================== */
+
+@media (max-width: 520px) {
+
+    .map-placeholder,
+    .map-container {
+        height: 300px;
+    }
+
+}
