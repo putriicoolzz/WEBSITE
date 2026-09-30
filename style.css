@@ -4959,3 +4959,16 @@ body.facility-modal-open {
 
 }
 
+/* =====================================================
+   HIDDEN OVERLAY — MOBILE WIDTH FIX
+===================================================== */
+
+.fullscreen-gallery:not(.active),
+.about-modal:not(.active) {
+    display: none;
+}
+
+.fullscreen-gallery.active,
+.about-modal.active {
+    display: flex;
+}
