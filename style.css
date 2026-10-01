@@ -2172,6 +2172,12 @@ html {
 
 @media (max-width: 520px) {
 
+    /* BOOKING */
+
+    .booking {
+        min-height: 480px;
+    }
+
     .section {
         padding-left: 22px;
         padding-right: 22px;
@@ -2244,8 +2250,11 @@ html {
     /* FOOTER */
 
     .footer {
-        padding-left: 22px;
-        padding-right: 22px;
+        padding: 60px 22px 24px;
+    }
+
+    .footer-grid {
+        gap: 45px;
     }
 
     .footer-grid {
