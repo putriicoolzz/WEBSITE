@@ -1337,6 +1337,10 @@ html {
 
 @media (max-width: 600px) {
 
+    .faq {
+        padding-bottom: 60px;
+    }
+
     .faq-heading {
         align-items: flex-start;
         flex-direction: column;
@@ -1857,12 +1861,6 @@ html {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .facility {
-        min-width: 0;
-        min-height: 210px;
-        padding: 30px;
-    }
-
 }
 
 
@@ -2171,6 +2169,13 @@ html {
 ===================================================== */
 
 @media (max-width: 520px) {
+
+    /* INTRO */
+
+    .intro {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
 
     /* BOOKING */
 
