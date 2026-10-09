@@ -13,12 +13,12 @@
 const KAIARA_CONFIG = {
 
     /* WhatsApp — gunakan format 62..., tanpa + */
-    stayWhatsapp: "",
-    cafeWhatsapp: "",
-    eventsWhatsapp: "",
+    stayWhatsapp: "628112250138",
+    cafeWhatsapp: "6285117195790",
+    eventsWhatsapp: "6285117195790",
 
     /* Contact */
-    email: "",
+    email: "kaiaragarden@gmail.com",
 
     /* Instagram */
     instagramHandle: "@kaiara.garden",
@@ -26,7 +26,7 @@ const KAIARA_CONFIG = {
 
     /* External links */
     cafeMenuUrl: "",
-    mapsDirectionsUrl: "",
+    mapsDirectionsUrl: "https://maps.app.goo.gl/qaK2VA8FExLWAdjB9",
 
     /* Café reservation Google Apps Script */
     cafeReservationApi:
@@ -34,7 +34,7 @@ const KAIARA_CONFIG = {
 
     /* Event inquiry — belum diisi */
     eventInquiryApi:
-    "https://script.google.com/macros/s/AKfycbyBxDhZ95RvNnH5uyNGuvJBu9PlxKEfDy11TY1O6e-qg2VVA1TkNpB2CDa7lCYr2AmPGA/exec"
+        "https://script.google.com/macros/s/AKfycbyBxDhZ95RvNnH5uyNGuvJBu9PlxKEfDy11TY1O6e-qg2VVA1TkNpB2CDa7lCYr2AmPGA/exec"
 
 };
 
@@ -1576,10 +1576,39 @@ function updateFullscreenGallery() {
     }
 
 
-    galleryImage.textContent =
-        activeGalleryPhotos[
-        currentGalleryIndex
-        ];
+
+    const currentPhoto = activeGalleryPhotos[currentGalleryIndex];
+
+    if (/\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i.test(currentPhoto)) {
+        const img = document.createElement("img");
+        img.src = currentPhoto;
+
+        img.onerror = function () {
+            galleryImage.textContent = "PHOTO COMING SOON";
+            galleryImage.style.display = "flex";
+            galleryImage.style.alignItems = "center";
+            galleryImage.style.justifyContent = "center";
+            galleryImage.style.color = "#777d6d";
+            galleryImage.style.fontSize = "13px";
+            galleryImage.style.letterSpacing = "2px";
+        };
+
+        img.onload = function () {
+            galleryImage.style.display = "";
+            galleryImage.style.alignItems = "";
+            galleryImage.style.justifyContent = "";
+        };
+
+        img.alt = "Kaiara Garden gallery photo";
+        img.style.cssText =
+            "display:block;width:100%;height:100%;max-height:80vh;object-fit:contain;";
+
+        galleryImage.replaceChildren(img);
+    } else {
+        // Tetap mendukung placeholder Rooms
+        galleryImage.textContent = currentPhoto;
+    }
+
 
 
     if (galleryCounter) {
@@ -1762,6 +1791,34 @@ function previousGalleryPhoto() {
         currentGalleryIndex - 1
     );
 
+}
+
+
+/* =====================================================
+   GATHERINGS — FULLSCREEN PHOTO GALLERY
+===================================================== */
+
+const gatheringGallery = document.getElementById("gatheringGallery");
+
+if (gatheringGallery) {
+    const gatheringButtons = [
+        ...gatheringGallery.querySelectorAll(
+            "[data-gathering-index]"
+        )
+    ];
+
+    gatheringButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            // Gunakan foto dari HTML, bukan foto Rooms
+            activeGalleryPhotos = gatheringButtons.map(item => {
+                return item.querySelector("img").getAttribute("src");
+            });
+
+            const index = Number(button.dataset.gatheringIndex) || 0;
+
+            openFullscreenGallery(index);
+        });
+    });
 }
 
 
@@ -4836,11 +4893,9 @@ WhatsApp: ${inquiryData.whatsapp}`;
             }
 
 
-            if (inquiryData.type) {
-
+            if (inquiryData.eventType) {
                 whatsappMessage +=
-                    `\nGathering Type: ${inquiryData.type}`;
-
+                    `\nGathering Type: ${inquiryData.eventType}`;
             }
 
 
@@ -5877,6 +5932,20 @@ if (heroSlides.length > 1) {
     }, 7000);
 
 }
+
+
+/* GATHERINGS — TAMPILKAN FOTO SAAT SUDAH TERSEDIA */
+
+document.querySelectorAll("#gatheringGallery img").forEach(img => {
+    const showImage = () => img.classList.add("is-loaded");
+
+    if (img.complete && img.naturalWidth > 0) {
+        showImage();
+    } else {
+        img.addEventListener("load", showImage);
+    }
+});
+
 
 /* =====================================================
    51. INITIAL STATE
