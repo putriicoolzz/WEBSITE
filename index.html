@@ -1769,29 +1769,86 @@
                 Cue tersebut tetap hanya berada di Hero.
             -->
 
-            <div class="gallery-grid">
+            
+<!-- =========================================
+     MAIN PHOTO GALLERY — KAIARA GARDEN
 
-                <div class="gallery-item gallery-large placeholder-image">
-                    <span>📷 PHOTO NEEDED · 01</span>
-                </div>
+     Homepage: 5 foto pilihan.
+     Fullscreen: 11 foto dari KAIARA_PHOTOS.
 
-                <div class="gallery-item placeholder-image">
-                    <span>📷 PHOTO NEEDED · 02</span>
-                </div>
+     Semua foto akan diambil dari database
+     di script.js, bukan ditulis ulang di HTML.
 
-                <div class="gallery-item placeholder-image">
-                    <span>📷 PHOTO NEEDED · 03</span>
-                </div>
+     Konsep foto:
+     01 — Overview beberapa bangunan
+     02 — Eksterior bangunan akomodasi
+     03 — Eksterior bangunan café
+     04 — Kolam renang
+     05 — Gathering / lifestyle
 
-                <div class="gallery-item placeholder-image">
-                    <span>📷 PHOTO NEEDED · 04</span>
-                </div>
+     Jangan ubah data-photo-id sembarangan.
+     Nilainya harus cocok dengan ID database.
+========================================= -->
 
-                <div class="gallery-item placeholder-image">
-                    <span>📷 PHOTO NEEDED · 05</span>
-                </div>
+<div class="gallery-grid" id="mainGallery">
 
-            </div>
+    <!-- 01 — SIGNATURE PROPERTY OVERVIEW
+         Foto utama: memperlihatkan beberapa bangunan
+         dan karakter keseluruhan Kaiara.
+         Idealnya foto portrait / vertical crop. -->
+    <button
+        class="gallery-item gallery-large"
+        type="button"
+        data-photo-id="propertyOverview"
+        aria-label="View Kaiara Garden property photos">
+        <span>PHOTO COMING SOON · 01</span>
+    </button>
+
+    <!-- 02 — ACCOMMODATION BUILDING
+         Foto eksterior bangunan kamar.
+         Hindari angle yang terlalu mirip foto 01. -->
+    <button
+        class="gallery-item"
+        type="button"
+        data-photo-id="accommodationExterior"
+        aria-label="View accommodation building photo">
+        <span>PHOTO COMING SOON · 02</span>
+    </button>
+
+    <!-- 03 — CAFÉ BUILDING
+         Memperlihatkan bangunan café dan ambience. -->
+    <button
+        class="gallery-item"
+        type="button"
+        data-photo-id="cafeExterior"
+        aria-label="View Kaiara Café photo">
+        <span>PHOTO COMING SOON · 03</span>
+    </button>
+
+    <!-- 04 — SWIMMING POOL
+         Foto pool dengan bangunan/taman sebagai
+         konteks, bukan close-up air saja. -->
+    <button
+        class="gallery-item"
+        type="button"
+        data-photo-id="swimmingPool"
+        aria-label="View swimming pool photo">
+        <span>PHOTO COMING SOON · 04</span>
+    </button>
+
+    <!-- 05 — GATHERING EXPERIENCE
+         Foto lifestyle: yoga, workshop, atau
+         intimate gathering di area Kaiara. -->
+    <button
+        class="gallery-item"
+        type="button"
+        data-photo-id="gathering"
+        aria-label="View gathering experience photo">
+        <span>PHOTO COMING SOON · 05</span>
+    </button>
+
+</div>
+
 
         </section>
 

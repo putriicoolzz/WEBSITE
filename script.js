@@ -40,6 +40,163 @@ const KAIARA_CONFIG = {
 
 
 /* =====================================================
+   KAIARA GARDEN — CENTRAL PHOTO LIBRARY
+
+   Semua path foto dikelola dari sini.
+
+   CARA MENGGANTI FOTO:
+   1. Masukkan file ke folder images/
+   2. Sesuaikan nilai src di bawah.
+   3. Gunakan ID foto untuk menampilkannya
+      di berbagai section website.
+
+   CATATAN:
+   - galleryOrder menentukan urutan fullscreen.
+   - homepage: true berarti foto termasuk 5 pilihan.
+   - building adalah label internal, bukan nama
+     bangunan resmi.
+   - Foto yang belum tersedia akan menggunakan
+     placeholder saat gallery dihubungkan nanti.
+===================================================== */
+
+const KAIARA_PHOTOS = {
+
+    // 01 — Foto utama yang menunjukkan keseluruhan
+    // karakter properti, idealnya beberapa bangunan.
+    propertyOverview: {
+        src: "images/gallery-01.jpg",
+        alt: "Kaiara Garden property overview",
+        category: "architecture",
+        building: "multiple",
+        homepage: true,
+        galleryOrder: 1
+    },
+
+    // 02 — Bangunan atau area akomodasi pertama.
+    // Foto eksterior, bukan close-up kamar.
+    accommodationExterior: {
+        src: "images/gallery-02.jpg",
+        alt: "Accommodation building at Kaiara Garden",
+        category: "architecture",
+        building: "accommodation",
+        homepage: true,
+        galleryOrder: 2
+    },
+
+    // 03 — Suasana kamar dengan cahaya alami.
+    bedroom: {
+        src: "images/gallery-03.jpg",
+        alt: "Comfortable guest room at Kaiara Garden",
+        category: "stay",
+        building: "accommodation",
+        homepage: false,
+        galleryOrder: 3
+    },
+
+    // 04 — Bangunan atau area café.
+    // Memperlihatkan identitas bangunan yang berbeda.
+    cafeExterior: {
+        src: "images/gallery-04.jpg",
+        alt: "Cafe building at Kaiara Garden",
+        category: "cafe",
+        building: "cafe",
+        homepage: true,
+        galleryOrder: 4
+    },
+
+    // 05 — Suasana café dengan makanan/minuman.
+    cafeAmbience: {
+        src: "images/gallery-05.jpg",
+        alt: "Dining and coffee experience",
+        category: "cafe",
+        building: "cafe",
+        homepage: false,
+        galleryOrder: 5
+    },
+
+    // 06 — Kolam renang dan area sekitarnya.
+    swimmingPool: {
+        src: "images/gallery-06.jpg",
+        alt: "Swimming pool at Kaiara Garden",
+        category: "facilities",
+        building: "outdoor",
+        homepage: true,
+        galleryOrder: 6
+    },
+
+    // 07 — Bangunan atau sudut arsitektur lainnya.
+    // Pilih angle berbeda dari foto 01 dan 02.
+    additionalBuilding: {
+        src: "images/gallery-07.jpg",
+        alt: "Another architectural view of Kaiara Garden",
+        category: "architecture",
+        building: "other",
+        homepage: false,
+        galleryOrder: 7
+    },
+
+    // 08 — Taman, courtyard, atau lounge outdoor.
+    gardenLounge: {
+        src: "images/gallery-08.jpg",
+        alt: "Garden and outdoor lounge",
+        category: "outdoor",
+        building: "outdoor",
+        homepage: false,
+        galleryOrder: 8
+    },
+
+    // 09 — Sauna atau fasilitas wellness.
+    wellness: {
+        src: "images/gallery-09.jpg",
+        alt: "Wellness experience at Kaiara Garden",
+        category: "wellness",
+        building: "facilities",
+        homepage: false,
+        galleryOrder: 9
+    },
+
+    // 10 — Dokumentasi aktivitas atau gathering.
+    gathering: {
+        src: "images/gallery-10.jpg",
+        alt: "Gathering experience at Kaiara Garden",
+        category: "experience",
+        building: "outdoor",
+        homepage: true,
+        galleryOrder: 10
+    },
+
+    // 11 — Suasana sore atau malam dengan
+    // pencahayaan hangat pada bangunan/properti.
+    eveningAmbience: {
+        src: "images/gallery-11.jpg",
+        alt: "Evening ambience at Kaiara Garden",
+        category: "atmosphere",
+        building: "multiple",
+        homepage: false,
+        galleryOrder: 11
+    }
+};
+
+/* Ambil satu foto berdasarkan ID.
+   Contoh: getKaiaraPhoto("swimmingPool") */
+function getKaiaraPhoto(photoId) {
+    return KAIARA_PHOTOS[photoId] || null;
+}
+
+/* Ambil semua foto sesuai urutan fullscreen. */
+function getKaiaraGalleryPhotos() {
+    return Object.values(KAIARA_PHOTOS)
+        .sort((a, b) => a.galleryOrder - b.galleryOrder);
+}
+
+/* Ambil hanya foto pilihan homepage. */
+function getKaiaraHomepagePhotos() {
+    return getKaiaraGalleryPhotos()
+        .filter(photo => photo.homepage);
+}
+
+
+/* =====================================================
    CONFIG HELPERS
 ===================================================== */
 
@@ -1819,6 +1976,73 @@ if (gatheringGallery) {
             openFullscreenGallery(index);
         });
     });
+}
+
+
+/* =====================================================
+   MAIN GALLERY — HOMEPAGE + FULLSCREEN
+
+   Homepage menampilkan 5 foto pilihan.
+   Fullscreen menampilkan seluruh 11 foto.
+
+   Semua sumber foto berasal dari KAIARA_PHOTOS.
+   Foto yang belum tersedia memakai placeholder.
+
+   Reusable: foto bisa digunakan di section lain
+   melalui getKaiaraPhoto("photoId").
+===================================================== */
+
+const mainGallery = document.getElementById("mainGallery");
+
+if (mainGallery) {
+
+    const allMainPhotos = getKaiaraGalleryPhotos();
+
+    const photoEntries = Object.entries(KAIARA_PHOTOS);
+
+    mainGallery.querySelectorAll("[data-photo-id]")
+        .forEach(button => {
+
+            const photoId = button.dataset.photoId;
+            const photo = getKaiaraPhoto(photoId);
+
+            if (!photo) return;
+
+            // Simpan deskripsi foto untuk accessibility.
+            button.setAttribute("aria-label", photo.alt);
+
+            // Tampilkan foto jika file tersedia.
+            const img = new Image();
+            img.alt = photo.alt;
+
+            img.onload = () => {
+                button.replaceChildren(img);
+                img.classList.add("main-gallery-image");
+            };
+
+            img.onerror = () => {
+                // Placeholder HTML tetap terlihat.
+            };
+
+            img.src = photo.src;
+
+            // Klik foto homepage → buka fullscreen 11 foto.
+            button.addEventListener("click", () => {
+
+                activeGalleryPhotos = allMainPhotos.map(
+                    item => item.src
+                );
+
+                const selectedIndex = allMainPhotos.findIndex(
+                    item => item === photo
+                );
+
+                openFullscreenGallery(
+                    selectedIndex >= 0 ? selectedIndex : 0
+                );
+            });
+
+        });
 }
 
 

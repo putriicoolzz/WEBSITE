@@ -7007,3 +7007,87 @@ body.event-modal-open {
 .experience-gallery button img.is-loaded {
     opacity: 1;
 }
+
+
+/* =========================================
+   MAIN GALLERY — PHOTO DISPLAY
+   ========================================= */
+
+#mainGallery .gallery-item {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    text-align: center;
+}
+
+#mainGallery .main-gallery-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+@media (hover: hover) {
+    #mainGallery .gallery-item:hover .main-gallery-image {
+        transform: scale(1.04);
+    }
+}
+
+#mainGallery .gallery-item:focus-visible {
+    outline: 2px solid #596b53;
+    outline-offset: 3px;
+}
+
+
+/* =========================================
+   MAIN GALLERY — ELEGANT PLACEHOLDERS
+   ========================================= */
+
+#mainGallery .gallery-item {
+    background: #dcd9ce;
+    color: #777363;
+    transition:
+        background 0.35s ease,
+        transform 0.35s ease;
+}
+
+#mainGallery .gallery-item:nth-child(2),
+#mainGallery .gallery-item:nth-child(5) {
+    background: #e5e1d7;
+}
+
+#mainGallery .gallery-item:nth-child(3) {
+    background: #d1d4c8;
+}
+
+#mainGallery .gallery-item:nth-child(4) {
+    background: #d8d2c6;
+}
+
+#mainGallery .gallery-item span {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    opacity: 0.55;
+}
+
+#mainGallery .gallery-item:hover {
+    transform: none;
+    background: #c9cabb;
+}
+
+#mainGallery .gallery-item:has(img) {
+    background: transparent;
+}
+
+/* GATHER AT KAIARA — CLICKABLE PHOTO CURSOR */
+
+#gatheringGallery button,
+#gatheringGallery button img {
+    cursor: pointer;
+}
