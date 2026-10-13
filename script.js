@@ -1951,6 +1951,43 @@ function previousGalleryPhoto() {
 }
 
 
+/* =========================================
+   FULLSCREEN GALLERY — MOBILE SWIPE
+   ========================================= */
+
+if (fullscreenGallery) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    fullscreenGallery.addEventListener("touchstart", (event) => {
+        if (event.touches.length !== 1) return;
+
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    fullscreenGallery.addEventListener("touchend", (event) => {
+        if (!fullscreenGallery.classList.contains("active")) return;
+        if (event.changedTouches.length !== 1) return;
+
+        const deltaX = event.changedTouches[0].clientX - touchStartX;
+        const deltaY = event.changedTouches[0].clientY - touchStartY;
+
+        // Abaikan gerakan vertikal dan sentuhan terlalu pendek.
+        if (Math.abs(deltaX) < 50) return;
+        if (Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+        if (deltaX < 0) {
+            // Swipe kiri: foto berikutnya.
+            showGalleryPhoto(currentGalleryIndex + 1);
+        } else {
+            // Swipe kanan: foto sebelumnya.
+            showGalleryPhoto(currentGalleryIndex - 1);
+        }
+    }, { passive: true });
+}
+
+
 /* =====================================================
    GATHERINGS — FULLSCREEN PHOTO GALLERY
 ===================================================== */

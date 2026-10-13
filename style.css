@@ -7091,3 +7091,47 @@ body.event-modal-open {
 #gatheringGallery button img {
     cursor: pointer;
 }
+
+
+/* =========================================
+   MAIN GALLERY — MOBILE SWIPE CAROUSEL
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    #mainGallery {
+        display: flex;
+        gap: 12px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 0;
+
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+
+        padding-bottom: 8px;
+    }
+
+    #mainGallery::-webkit-scrollbar {
+        display: none;
+    }
+
+    #mainGallery .gallery-item {
+        flex: 0 0 86%;
+        width: 86%;
+        min-width: 0;
+        height: 300px;
+        min-height: 300px;
+
+        scroll-snap-align: start;
+        transform: none;
+    }
+
+    #mainGallery .gallery-large {
+        grid-row: auto;
+    }
+
+}
