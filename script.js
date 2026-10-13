@@ -5716,12 +5716,12 @@ bottomStayButtons.forEach(button => {
         const bookingSection =
             document.getElementById("booking");
 
-        if (bookingSection) {
-            bookingSection.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        }
+        if (!bookingSection) return;
+
+        bookingSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
 
         if (typeof showStayBookingOptions === "function") {
             showStayBookingOptions();
@@ -6550,6 +6550,7 @@ if (stayBookingForm) {
             `Check-out: ${checkout}`,
             `Guests: ${data.get("guests")}`,
             `Preferred Room: ${data.get("room")}`,
+            `Occasion: ${data.get("occasion") || "-"}`,
             `Special Requests: ${data.get("notes") || "-"}`,
             "",
             "Could you please help me check availability and rates?",
