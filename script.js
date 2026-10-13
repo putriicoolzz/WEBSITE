@@ -22,7 +22,7 @@ const KAIARA_CONFIG = {
 
     /* Instagram */
     instagramHandle: "@kaiara.garden",
-    instagramUrl: "",
+    instagramUrl: "https://www.instagram.com/kaiara.garden?stkn=MWJjaTJ4YWpjZmJlYQ%3D%3D&utm_source=qr",
 
     /* External links */
     cafeMenuUrl: "",
@@ -34,7 +34,10 @@ const KAIARA_CONFIG = {
 
     /* Event inquiry — belum diisi */
     eventInquiryApi:
-        "https://script.google.com/macros/s/AKfycbyBxDhZ95RvNnH5uyNGuvJBu9PlxKEfDy11TY1O6e-qg2VVA1TkNpB2CDa7lCYr2AmPGA/exec"
+        "https://script.google.com/macros/s/AKfycbyBxDhZ95RvNnH5uyNGuvJBu9PlxKEfDy11TY1O6e-qg2VVA1TkNpB2CDa7lCYr2AmPGA/exec",
+
+    /* Stay booking */
+    airbnbUrl: "abc",
 
 };
 
@@ -2015,6 +2018,57 @@ if (gatheringGallery) {
     });
 }
 
+/* =====================================================
+   GATHERING — MOBILE SWIPE COUNTER
+===================================================== */
+
+if (gatheringGallery) {
+
+    const current = document.getElementById("gatheringGalleryCurrent");
+    const total = document.getElementById("gatheringGalleryTotal");
+
+    const photos = [
+        ...gatheringGallery.querySelectorAll("[data-gathering-index]")
+    ];
+
+    if (current && total && photos.length) {
+
+        total.textContent = photos.length;
+
+        function updateGatheringCounter() {
+
+            const galleryRect = gatheringGallery.getBoundingClientRect();
+            const galleryCenter = galleryRect.left + galleryRect.width / 2;
+
+            let activeIndex = 0;
+            let closestDistance = Infinity;
+
+            photos.forEach((photo, index) => {
+
+                const rect = photo.getBoundingClientRect();
+                const photoCenter = rect.left + rect.width / 2;
+                const distance = Math.abs(photoCenter - galleryCenter);
+
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    activeIndex = index;
+                }
+            });
+
+            current.textContent = activeIndex + 1;
+        }
+
+        gatheringGallery.addEventListener(
+            "scroll",
+            updateGatheringCounter,
+            { passive: true }
+        );
+
+        window.addEventListener("resize", updateGatheringCounter);
+
+        updateGatheringCounter();
+    }
+}
 
 /* =====================================================
    MAIN GALLERY — HOMEPAGE + FULLSCREEN
@@ -2080,6 +2134,73 @@ if (mainGallery) {
             });
 
         });
+}
+
+
+/* =========================================
+   MOBILE GALLERY — 11 PHOTOS + SWIPE COUNTER
+   ========================================= */
+
+const mobileGallery = document.getElementById("mobileGallery");
+const mobileGalleryCurrent = document.getElementById("mobileGalleryCurrent");
+const mobileGalleryTotal = document.getElementById("mobileGalleryTotal");
+
+if (mobileGallery) {
+
+    const mobilePhotos = getKaiaraGalleryPhotos();
+
+    if (mobileGalleryTotal) {
+        mobileGalleryTotal.textContent = mobilePhotos.length;
+    }
+
+    mobilePhotos.forEach((photo, index) => {
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "mobile-gallery-item";
+        button.setAttribute("aria-label", photo.alt);
+
+        const placeholder = document.createElement("span");
+        placeholder.textContent = "PHOTO COMING SOON";
+        button.appendChild(placeholder);
+
+        const img = new Image();
+        img.alt = photo.alt;
+
+        img.onload = () => {
+            button.replaceChildren(img);
+        };
+
+        img.src = photo.src;
+
+        button.addEventListener("click", () => {
+            activeGalleryPhotos = mobilePhotos.map(item => item.src);
+            openFullscreenGallery(index);
+        });
+
+        mobileGallery.appendChild(button);
+    });
+
+    function updateMobileGalleryCounter() {
+        const firstPhoto = mobileGallery.querySelector(".mobile-gallery-item");
+        if (!firstPhoto || !mobileGalleryCurrent) return;
+
+        const step = firstPhoto.getBoundingClientRect().width
+            + parseFloat(getComputedStyle(mobileGallery).columnGap || 0);
+
+        if (!step) return;
+
+        const index = Math.round(mobileGallery.scrollLeft / step);
+
+        mobileGalleryCurrent.textContent =
+            Math.min(Math.max(index + 1, 1), mobilePhotos.length);
+    }
+
+    mobileGallery.addEventListener("scroll", updateMobileGalleryCounter, {
+        passive: true
+    });
+
+    window.addEventListener("resize", updateMobileGalleryCounter);
 }
 
 
@@ -2184,74 +2305,54 @@ if (fullscreenGalleryBackdrop) {
 
 
 /* =====================================================
-   12. ROOM BOOKING CTA
+   12. ROOM BOOKING CTA — SCROLL TO BOOKING
 ===================================================== */
 
 const roomBookingButton =
-    document.querySelector(
-        ".room-modal-book-button"
-    );
-
+    document.querySelector(".room-modal-book-button");
 
 if (roomBookingButton) {
 
-    roomBookingButton.addEventListener(
-        "click",
-        event => {
+    roomBookingButton.addEventListener("click", event => {
 
-            event.preventDefault();
+        event.preventDefault();
 
+        const selectedRoom = activeRoomKey;
 
-            const room =
-                ROOM_DATA[
-                activeRoomKey
-                ];
-
-
-            const roomName =
-                room
-                    ? room.name
-                    : "a room";
-
-
-            const message =
-                `Hello Kaiara Garden, I would like to check availability for ${roomName}.`;
-
-
-            const url =
-                makeWhatsAppUrl(
-                    KAIARA_CONFIG.stayWhatsapp,
-                    message
-                );
-
-
-            /*
-               Nomor belum diisi:
-               jangan buka wa.me kosong.
-            */
-
-            if (url === "#") {
-
-                console.warn(
-                    "Stay WhatsApp number has not been added to KAIARA_CONFIG yet."
-                );
-
-                return;
-
-            }
-
-
-            window.open(
-                url,
-                "_blank",
-                "noopener"
-            );
-
+        if (typeof closeRoomModal === "function") {
+            closeRoomModal();
         }
-    );
 
+        const bookingSection =
+            document.getElementById("booking");
+
+        if (bookingSection) {
+            bookingSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        if (selectedRoom) {
+            const roomSelect =
+                document.querySelector(
+                    '#stayBookingForm select[name="room"]'
+                );
+
+            const roomNames = {
+                garden: "Walnut Garden",
+                terrace: "Walnut Terrace",
+                suite: "Pine Suite",
+                loft: "Oak Loft"
+            };
+
+            if (roomSelect) {
+                roomSelect.value =
+                    roomNames[selectedRoom] || "No preference";
+            }
+        }
+    });
 }
-
 
 /* =====================================================
    13. ROOM / GALLERY KEYBOARD CONTROL
@@ -3371,12 +3472,11 @@ document.addEventListener(
 ===================================================== */
 
 const CAFE_PHOTOS = [
-    "🔴 [KAIARA CAFÉ · PHOTO 1]",
-    "🔴 [KAIARA CAFÉ · PHOTO 2]",
-    "🔴 [KAIARA CAFÉ · PHOTO 3]",
-    "🔴 [KAIARA CAFÉ · PHOTO 4]",
-    "🔴 [KAIARA CAFÉ · PHOTO 5]",
-    "🔴 [KAIARA CAFÉ · PHOTO 6]"
+    "images/cafe-01.jpg",
+    "images/cafe-02.jpg",
+    "images/cafe-03.jpg",
+    "images/cafe-04.jpg",
+    "images/cafe-05.jpg"
 ];
 
 const cafeModalImage =
@@ -3417,8 +3517,24 @@ function openCafeModal() {
         [...CAFE_PHOTOS];
 
     if (cafeModalImage) {
-        cafeModalImage.textContent =
-            activeGalleryPhotos[0];
+
+        const photoSrc = CAFE_PHOTOS[0];
+
+        cafeModalImage.textContent = "KAIARA GARDEN";
+
+        const img = new Image();
+        img.alt = "Kaiara Café ambience";
+
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "cover";
+        img.style.display = "block";
+
+        img.onload = () => {
+            cafeModalImage.replaceChildren(img);
+        };
+
+        img.src = photoSrc;
     }
 
     cafeModal
@@ -3523,9 +3639,7 @@ if (cafeHomepageImage) {
     cafeHomepageImage.addEventListener(
         "click",
         () => {
-
             openCafeModal();
-
         }
     );
 
@@ -4168,7 +4282,7 @@ Guests: ${reservationData.guests}`;
                         );
 
                         alert(
-                            "Your reservation details have been submitted. WhatsApp confirmation will be available once the café contact number is connected."
+                            "We're unable to open WhatsApp at the moment. Please contact Kaiara directly to confirm your reservation."
                         );
 
                     }
@@ -5587,9 +5701,7 @@ if (aboutModalBackdrop) {
 
 /* =====================================================
    40. BOTTOM CTA — STAY
-
-   Café + Gatherings are handled
-   in Parts 4 and 5.
+   Open booking options instead of WhatsApp
 ===================================================== */
 
 const bottomStayButtons =
@@ -5597,57 +5709,25 @@ const bottomStayButtons =
         ".booking-stay-button, [data-booking='stay']"
     );
 
+bottomStayButtons.forEach(button => {
+    button.addEventListener("click", event => {
+        event.preventDefault();
 
-bottomStayButtons.forEach(
-    button => {
+        const bookingSection =
+            document.getElementById("booking");
 
-        button.addEventListener(
-            "click",
-            event => {
+        if (bookingSection) {
+            bookingSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
 
-                if (
-                    !KAIARA_CONFIG
-                        .stayWhatsapp
-                ) {
-
-                    event.preventDefault();
-
-                    console.warn(
-                        "Stay WhatsApp number has not been added to KAIARA_CONFIG yet."
-                    );
-
-                    return;
-
-                }
-
-
-                const message =
-                    "Hello Kaiara Garden, I would like to check room availability for a stay.";
-
-
-                const url =
-                    makeWhatsAppUrl(
-                        KAIARA_CONFIG
-                            .stayWhatsapp,
-                        message
-                    );
-
-
-                event.preventDefault();
-
-
-                window.open(
-                    url,
-                    "_blank",
-                    "noopener"
-                );
-
-            }
-        );
-
-    }
-);
-
+        if (typeof showStayBookingOptions === "function") {
+            showStayBookingOptions();
+        }
+    });
+});
 
 /* =====================================================
    41. GENERIC STAY WHATSAPP LINKS
@@ -6207,6 +6287,315 @@ document.querySelectorAll("#gatheringGallery img").forEach(img => {
     }
 });
 
+/* =====================================================
+   CAFÉ — TAMPILKAN FOTO SAAT SUDAH TERSEDIA
+===================================================== */
+
+document.querySelectorAll("#cafeGallery img").forEach(img => {
+
+    const showImage = () => {
+        img.classList.add("is-loaded");
+    };
+
+    if (img.complete && img.naturalWidth > 0) {
+        showImage();
+    } else {
+        img.addEventListener("load", showImage);
+    }
+
+});
+
+/* =====================================================
+   CAFÉ — MOBILE SWIPE COUNTER
+===================================================== */
+
+const cafeGallery = document.getElementById("cafeGallery");
+
+if (cafeGallery) {
+
+    const current = document.getElementById("cafeGalleryCurrent");
+    const total = document.getElementById("cafeGalleryTotal");
+
+    const photos = [
+        ...cafeGallery.querySelectorAll(".cafe-gallery-item")
+    ];
+
+    if (current && total && photos.length) {
+
+        total.textContent = photos.length;
+
+        function updateCafeCounter() {
+
+            const galleryRect = cafeGallery.getBoundingClientRect();
+            const galleryCenter = galleryRect.left + galleryRect.width / 2;
+
+            let activeIndex = 0;
+            let closestDistance = Infinity;
+
+            photos.forEach((photo, index) => {
+
+                const rect = photo.getBoundingClientRect();
+                const photoCenter = rect.left + rect.width / 2;
+                const distance = Math.abs(photoCenter - galleryCenter);
+
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    activeIndex = index;
+                }
+            });
+
+            current.textContent = activeIndex + 1;
+        }
+
+        cafeGallery.addEventListener(
+            "scroll",
+            updateCafeCounter,
+            { passive: true }
+        );
+
+        window.addEventListener("resize", updateCafeCounter);
+
+        updateCafeCounter();
+    }
+}
+
+/* =====================================================
+   CAFÉ — FULLSCREEN PHOTO GALLERY
+===================================================== */
+
+if (cafeGallery) {
+
+    const cafePhotos = [
+        ...cafeGallery.querySelectorAll(".cafe-gallery-item img")
+    ];
+
+    cafePhotos.forEach((img, index) => {
+
+        img.parentElement.style.cursor = "pointer";
+
+        img.parentElement.addEventListener("click", () => {
+
+            activeGalleryPhotos = cafePhotos.map(photo => {
+                return photo.getAttribute("src");
+            });
+
+            openFullscreenGallery(index);
+
+        });
+
+    });
+
+}
+
+/* =========================================
+   FOOTER — DISPLAY CONTACT NUMBERS
+========================================= */
+
+function formatFooterWhatsapp(number) {
+    const digits = String(number || "").replace(/\D/g, "");
+
+    if (!digits) return "";
+
+    return "+" + digits;
+}
+
+const footerStayNumber =
+    document.getElementById("footerStayNumber");
+
+const footerCafeNumber =
+    document.getElementById("footerCafeNumber");
+
+if (footerStayNumber) {
+    footerStayNumber.textContent =
+        formatFooterWhatsapp(KAIARA_CONFIG.stayWhatsapp);
+}
+
+if (footerCafeNumber) {
+    footerCafeNumber.textContent =
+        formatFooterWhatsapp(KAIARA_CONFIG.cafeWhatsapp);
+}
+
+const footerEmail =
+    document.getElementById("footerEmail");
+
+if (footerEmail && KAIARA_CONFIG.email) {
+    footerEmail.textContent = KAIARA_CONFIG.email;
+    footerEmail.href = `mailto:${KAIARA_CONFIG.email}`;
+}
+
+/* =====================================================
+   43. STAY BOOKING — DIRECT & AIRBNB
+===================================================== */
+
+const stayBookingToggle =
+    document.getElementById("showStayBooking");
+
+const stayBookingOptions =
+    document.getElementById("stayBookingOptions");
+
+const stayBookingForm =
+    document.getElementById("stayBookingForm");
+
+const stayAirbnbLink =
+    document.getElementById("stayAirbnbLink");
+
+
+/* OPEN BOOKING OPTIONS */
+
+function showStayBookingOptions() {
+
+    if (!stayBookingOptions) return;
+
+    stayBookingOptions.hidden = false;
+
+    stayBookingOptions.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+if (stayBookingToggle) {
+    stayBookingToggle.addEventListener("click", event => {
+        event.preventDefault();
+        showStayBookingOptions();
+    });
+}
+
+
+/* AIRBNB LINK */
+
+if (stayAirbnbLink) {
+
+    const airbnbUrl = KAIARA_CONFIG.airbnbUrl;
+
+    if (airbnbUrl && /^https:\/\/(www\.)?airbnb\.[^/]+\/rooms\//i.test(airbnbUrl)) {
+        stayAirbnbLink.href = airbnbUrl;
+    } else {
+        stayAirbnbLink.removeAttribute("href");
+        stayAirbnbLink.setAttribute("aria-disabled", "true");
+        stayAirbnbLink.textContent = "Airbnb listing coming soon";
+    }
+}
+
+
+/* DATE VALIDATION */
+
+const stayCheckin =
+    document.getElementById("stayCheckin");
+
+const stayCheckout =
+    document.getElementById("stayCheckout");
+
+function localDateString(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+
+const today = localDateString(new Date());
+
+if (stayCheckin && stayCheckout) {
+
+    stayCheckin.min = today;
+    stayCheckout.min = today;
+
+    stayCheckin.addEventListener("change", () => {
+
+        if (!stayCheckin.value) return;
+
+        const nextDay = new Date(
+            `${stayCheckin.value}T12:00:00`
+        );
+
+        nextDay.setDate(nextDay.getDate() + 1);
+
+        stayCheckout.min = localDateString(nextDay);
+
+        if (stayCheckout.value <= stayCheckin.value) {
+            stayCheckout.value = "";
+        }
+    });
+}
+
+
+/* DIRECT BOOKING FORM */
+
+if (stayBookingForm) {
+
+    stayBookingForm.addEventListener("submit", event => {
+
+        event.preventDefault();
+
+        if (!stayBookingForm.reportValidity()) return;
+
+        const data = new FormData(stayBookingForm);
+
+        const checkin = data.get("checkin");
+        const checkout = data.get("checkout");
+
+        if (checkout <= checkin) {
+            alert("Check-out must be after check-in.");
+            return;
+        }
+
+        const message = [
+            "Hello Kaiara Garden!",
+            "",
+            "I'd like to enquire about a stay.",
+            "",
+            `Name: ${data.get("guestName")}`,
+            `WhatsApp: ${data.get("guestPhone")}`,
+            `Check-in: ${checkin}`,
+            `Check-out: ${checkout}`,
+            `Guests: ${data.get("guests")}`,
+            `Preferred Room: ${data.get("room")}`,
+            `Special Requests: ${data.get("notes") || "-"}`,
+            "",
+            "Could you please help me check availability and rates?",
+            "",
+            "Thank you!"
+        ].join("\n");
+
+        const url = makeWhatsAppUrl(
+            KAIARA_CONFIG.stayWhatsapp,
+            message
+        );
+
+        if (url === "#") {
+            alert("Our reservation contact is not available yet.");
+            return;
+        }
+
+        window.open(url, "_blank", "noopener");
+    });
+}
+
+/* =========================================
+   STAY BOOKING — UNIFIED NAVIGATION
+========================================= */
+
+document.querySelectorAll(
+    'a[href="#booking"], a[href="#stayBookingOptions"]'
+).forEach(link => {
+
+    link.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+        const bookingSection =
+            document.getElementById("booking");
+
+        if (!bookingSection) return;
+
+        bookingSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    });
+
+});
 
 /* =====================================================
    51. INITIAL STATE

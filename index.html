@@ -1268,10 +1268,40 @@
                 </div>
 
 
-                <div class="cafe-image placeholder-image">
-                    <span>
-                        🔴 [ISI FOTO CAFÉ]
-                    </span>
+                <!-- CAFÉ PHOTO GALLERY -->
+                <div class="cafe-gallery-wrapper">
+
+                    <div class="cafe-gallery" id="cafeGallery">
+
+                        <div class="cafe-gallery-item">
+                            <img src="images/cafe-01.jpg" alt="Kaiara Café ambience">
+                        </div>
+
+                        <div class="cafe-gallery-item">
+                            <img src="images/cafe-02.jpg" alt="Kaiara Café interior">
+                        </div>
+
+                        <div class="cafe-gallery-item">
+                            <img src="images/cafe-03.jpg" alt="Coffee at Kaiara Café">
+                        </div>
+
+                        <div class="cafe-gallery-item">
+                            <img src="images/cafe-04.jpg" alt="Food at Kaiara Café">
+                        </div>
+
+                        <div class="cafe-gallery-item">
+                            <img src="images/cafe-05.jpg" alt="Garden café seating">
+                        </div>
+
+                    </div>
+
+                    <!-- CAFÉ MOBILE COUNTER -->
+                    <div class="cafe-gallery-counter" id="cafeGalleryCounter">
+                        <span id="cafeGalleryCurrent">1</span>
+                        <span>/</span>
+                        <span id="cafeGalleryTotal">5</span>
+                    </div>
+
                 </div>
 
             </div>
@@ -1286,36 +1316,44 @@
         <section class="experience section" id="experience">
 
             <div class="experience-grid">
+                <div class="gathering-gallery-wrapper">
 
+                    <div class="experience-gallery" id="gatheringGallery">
 
-                <div class="experience-gallery" id="gatheringGallery">
-
-                    <!-- FOTO UTAMA -->
-                    <button class="experience-gallery-main" type="button" data-gathering-index="0">
-                        <img src="images/gathering-01.jpg" alt="Gathering at Kaiara Garden">
-                    </button>
-
-                    <!-- FOTO TAMBAHAN -->
-                    <div class="experience-gallery-thumbnails">
-                        <button type="button" data-gathering-index="1">
-                            <img src="images/gathering-02.jpg" alt="Gathering photo 2">
+                        <!-- FOTO UTAMA -->
+                        <button class="experience-gallery-main" type="button" data-gathering-index="0">
+                            <img src="images/gathering-01.jpg" alt="Gathering at Kaiara Garden">
                         </button>
 
-                        <button type="button" data-gathering-index="2">
-                            <img src="images/gathering-03.jpg" alt="Gathering photo 3">
-                        </button>
+                        <!-- FOTO TAMBAHAN -->
+                        <div class="experience-gallery-thumbnails">
+                            <button type="button" data-gathering-index="1">
+                                <img src="images/gathering-02.jpg" alt="Gathering photo 2">
+                            </button>
 
-                        <button type="button" data-gathering-index="3">
-                            <img src="images/gathering-04.jpg" alt="Gathering photo 4">
-                        </button>
+                            <button type="button" data-gathering-index="2">
+                                <img src="images/gathering-03.jpg" alt="Gathering photo 3">
+                            </button>
 
-                        <button type="button" data-gathering-index="4">
-                            <img src="images/gathering-05.jpg" alt="Gathering photo 5">
-                        </button>
+                            <button type="button" data-gathering-index="3">
+                                <img src="images/gathering-04.jpg" alt="Gathering photo 4">
+                            </button>
+
+                            <button type="button" data-gathering-index="4">
+                                <img src="images/gathering-05.jpg" alt="Gathering photo 5">
+                            </button>
+                        </div>
+
+                    </div> <!-- penutup gatheringGallery -->
+
+                    <!-- GATHERING MOBILE GALLERY COUNTER -->
+                    <div class="gathering-gallery-counter" id="gatheringGalleryCounter">
+                        <span id="gatheringGalleryCurrent">1</span>
+                        <span>/</span>
+                        <span id="gatheringGalleryTotal">5</span>
                     </div>
 
-                </div>
-
+                </div> <!-- penutup gathering-gallery-wrapper -->
 
                 <div class="experience-content">
 
@@ -1351,6 +1389,8 @@
 
                 </div>
 
+
+            </div>
             </div>
 
         </section>
@@ -1769,8 +1809,8 @@
                 Cue tersebut tetap hanya berada di Hero.
             -->
 
-            
-<!-- =========================================
+
+            <!-- =========================================
      MAIN PHOTO GALLERY — KAIARA GARDEN
 
      Homepage: 5 foto pilihan.
@@ -1790,64 +1830,59 @@
      Nilainya harus cocok dengan ID database.
 ========================================= -->
 
-<div class="gallery-grid" id="mainGallery">
+            <div class="gallery-grid" id="mainGallery">
 
-    <!-- 01 — SIGNATURE PROPERTY OVERVIEW
+                <!-- 01 — SIGNATURE PROPERTY OVERVIEW
          Foto utama: memperlihatkan beberapa bangunan
          dan karakter keseluruhan Kaiara.
          Idealnya foto portrait / vertical crop. -->
-    <button
-        class="gallery-item gallery-large"
-        type="button"
-        data-photo-id="propertyOverview"
-        aria-label="View Kaiara Garden property photos">
-        <span>PHOTO COMING SOON · 01</span>
-    </button>
+                <button class="gallery-item gallery-large" type="button" data-photo-id="propertyOverview"
+                    aria-label="View Kaiara Garden property photos">
+                    <span>PHOTO COMING SOON · 01</span>
+                </button>
 
-    <!-- 02 — ACCOMMODATION BUILDING
+                <!-- 02 — ACCOMMODATION BUILDING
          Foto eksterior bangunan kamar.
          Hindari angle yang terlalu mirip foto 01. -->
-    <button
-        class="gallery-item"
-        type="button"
-        data-photo-id="accommodationExterior"
-        aria-label="View accommodation building photo">
-        <span>PHOTO COMING SOON · 02</span>
-    </button>
+                <button class="gallery-item" type="button" data-photo-id="accommodationExterior"
+                    aria-label="View accommodation building photo">
+                    <span>PHOTO COMING SOON · 02</span>
+                </button>
 
-    <!-- 03 — CAFÉ BUILDING
+                <!-- 03 — CAFÉ BUILDING
          Memperlihatkan bangunan café dan ambience. -->
-    <button
-        class="gallery-item"
-        type="button"
-        data-photo-id="cafeExterior"
-        aria-label="View Kaiara Café photo">
-        <span>PHOTO COMING SOON · 03</span>
-    </button>
+                <button class="gallery-item" type="button" data-photo-id="cafeExterior"
+                    aria-label="View Kaiara Café photo">
+                    <span>PHOTO COMING SOON · 03</span>
+                </button>
 
-    <!-- 04 — SWIMMING POOL
+                <!-- 04 — SWIMMING POOL
          Foto pool dengan bangunan/taman sebagai
          konteks, bukan close-up air saja. -->
-    <button
-        class="gallery-item"
-        type="button"
-        data-photo-id="swimmingPool"
-        aria-label="View swimming pool photo">
-        <span>PHOTO COMING SOON · 04</span>
-    </button>
+                <button class="gallery-item" type="button" data-photo-id="swimmingPool"
+                    aria-label="View swimming pool photo">
+                    <span>PHOTO COMING SOON · 04</span>
+                </button>
 
-    <!-- 05 — GATHERING EXPERIENCE
+                <!-- 05 — GATHERING EXPERIENCE
          Foto lifestyle: yoga, workshop, atau
          intimate gathering di area Kaiara. -->
-    <button
-        class="gallery-item"
-        type="button"
-        data-photo-id="gathering"
-        aria-label="View gathering experience photo">
-        <span>PHOTO COMING SOON · 05</span>
-    </button>
+                <button class="gallery-item" type="button" data-photo-id="gathering"
+                    aria-label="View gathering experience photo">
+                    <span>PHOTO COMING SOON · 05</span>
+                </button>
 
-</div>
+            </div>
+
+            <!-- MOBILE GALLERY — 11 SWIPEABLE PHOTOS -->
+            <div class="mobile-gallery" id="mobileGallery"></div>
+
+            <!-- MOBILE GALLERY COUNTER -->
+            <div class="mobile-gallery-counter" id="mobileGalleryCounter" aria-live="polite">
+                <span id="mobileGalleryCurrent">1</span>
+                <span>/</span>
+                <span id="mobileGalleryTotal">11</span>
+            </div>
 
 
         </section>
@@ -2154,9 +2189,10 @@
                         </button>
 
                         <div class="faq-answer">
-                            You can send us a booking request directly
-                            through WhatsApp. Online booking options may
-                            also be available through selected booking platforms.
+                            You can book your stay directly through WhatsApp
+                            or via our Airbnb listing. For direct bookings,
+                            simply click Book Your Stay to check availability
+                            and get in touch with our reservations team.
                         </div>
 
                     </div>
@@ -2173,9 +2209,8 @@
                         </button>
 
                         <div class="faq-answer">
-                            Kaiara offers Walnut Rooms in Garden View
-                            and Terrace View configurations, the Pine Suite,
-                            and the two-bedroom Oak Loft.
+                            Kaiara offers Regular Rooms with Garden View or Terrace View options, as well as our Suite
+                            and Loft for guests seeking additional comfort and space.
                         </div>
 
                     </div>
@@ -2192,7 +2227,7 @@
                         </button>
 
                         <div class="faq-answer">
-                            🔴 [ISI KEBIJAKAN / KETERSEDIAAN PARKIR]
+                            Please contact our team before arrival for parking information and assistance.
                         </div>
 
                     </div>
@@ -2265,7 +2300,19 @@
                         </button>
 
                         <div class="faq-answer">
-                            🔴 [ISI CANCELLATION / RESCHEDULE POLICY]
+                            For direct bookings via WhatsApp, cancellations
+                            made at least 7 days before check-in are eligible
+                            for a full refund. Cancellations made 3–6 days
+                            before check-in are eligible for a 50% refund.
+                            Cancellations made less than 3 days before check-in,
+                            as well as no-shows, are non-refundable.
+
+                            One date change may be requested at least 3 days
+                            before check-in, subject to availability and
+                            any applicable rate difference.
+
+                            For Airbnb bookings, the cancellation policy
+                            displayed on your Airbnb reservation applies.
                         </div>
 
                     </div>
@@ -2366,7 +2413,8 @@
                         </button>
 
                         <div class="faq-answer">
-                            🔴 [ISI / LINK MENU SETELAH PDF MENU FINAL TERSEDIA]
+                            You can explore our menu through the View Our Menu button in the Kaiara Café section. For
+                            further enquiries, feel free to contact our café team.
                         </div>
 
                     </div>
@@ -2448,10 +2496,10 @@
                         </button>
 
                         <div class="faq-answer">
-                            Kaiara can accommodate selected private celebrations,
-                            family occasions, workshops, wellness experiences,
-                            community gatherings, corporate occasions,
-                            and group stays.
+                            Kaiara is suited to intimate celebrations, wellness sessions, workshops, private gatherings,
+                            family events, and selected community events. Each event is reviewed based on its
+                            requirements and venue availability.
+
                         </div>
 
                     </div>
@@ -2508,9 +2556,9 @@
                         </button>
 
                         <div class="faq-answer">
-                            Yes. Food and beverage arrangements can be discussed
-                            as part of your gathering through Kaiara Café,
-                            depending on the occasion and requirements.
+                            Yes, Kaiara Café can provide food and beverage arrangements for gatherings and events.
+                            Packages can be discussed based on your group size, menu preferences, and event
+                            requirements.
                         </div>
 
                     </div>
@@ -2546,14 +2594,38 @@
                         </button>
 
                         <div class="faq-answer">
-                            Use the Plan a Gathering form on our website
-                            to tell us about your occasion. Our team can then
-                            continue the conversation with you directly.
+                            You can submit an event enquiry through our website by sharing your preferred date,
+                            estimated number of guests, and event details. Our team will continue the conversation via
+                            WhatsApp to discuss availability and arrangements.
+                        </div>
+
+                        <div class="faq-item">
+
+                            <button class="faq-question" type="button">
+                                What if I need to change or cancel my event?
+                                <span>+</span>
+                            </button>
+
+                            <div class="faq-answer">
+                                To secure your preferred date, a 50% deposit
+                                is required upon booking. Please note that
+                                this deposit is non-refundable in the event
+                                of cancellation.
+
+                                If your plans change, we're happy to discuss
+                                rescheduling options, subject to availability,
+                                advance notice, and any applicable additional
+                                charges. Full booking terms will be shared
+                                before payment.
+                            </div>
+
                         </div>
 
                     </div>
 
                 </div>
+
+            </div>
 
             </div>
 
@@ -2589,7 +2661,7 @@
 
                 <div class="booking-actions">
 
-                    <a href="#" class="btn btn-light stay-whatsapp-link">
+                    <a href="#stayBookingOptions" class="btn btn-light" id="showStayBooking">
                         Book Your Stay →
                     </a>
 
@@ -2600,6 +2672,123 @@
                     <button class="text-link booking-secondary" id="openEventFormBottom" type="button">
                         Plan a Gathering →
                     </button>
+
+                </div>
+
+                <div class="stay-booking-options" id="stayBookingOptions" hidden>
+
+                    <div class="stay-booking-heading">
+                        <p class="section-label">RESERVATIONS</p>
+                        <h3>Plan your stay.</h3>
+                        <p>Choose how you'd like to make your reservation.</p>
+                    </div>
+
+                    <div class="stay-booking-grid">
+
+                        <div class="stay-booking-card">
+
+                            <span class="stay-booking-label">BOOK DIRECT</span>
+                            <h4>Stay with us.</h4>
+
+                            <p>
+                                Share your preferred dates and we'll help you
+                                check availability and rates.
+                            </p>
+
+                            <form id="stayBookingForm">
+
+                                <div class="stay-booking-fields">
+
+                                    <label>
+                                        Your Name *
+                                        <input type="text" name="guestName" autocomplete="name" required>
+                                    </label>
+
+                                    <label>
+                                        WhatsApp Number *
+                                        <input type="tel" name="guestPhone" autocomplete="tel" required>
+                                    </label>
+
+                                    <label>
+                                        Check-in *
+                                        <input type="date" name="checkin" id="stayCheckin" required>
+                                    </label>
+
+                                    <label>
+                                        Check-out *
+                                        <input type="date" name="checkout" id="stayCheckout" required>
+                                    </label>
+
+                                    <label>
+                                        Number of Guests *
+                                        <input type="number" name="guests" min="1" max="20" value="2" required>
+                                    </label>
+
+                                    <label>
+                                        Preferred Room
+                                        <select name="room">
+                                            <option value="No preference">
+                                                No preference
+                                            </option>
+                                            <option value="Walnut Garden">
+                                                Walnut Garden
+                                            </option>
+                                            <option value="Walnut Terrace">
+                                                Walnut Terrace
+                                            </option>
+                                            <option value="Pine Suite">
+                                                Pine Suite
+                                            </option>
+                                            <option value="Oak Loft">
+                                                Oak Loft
+                                            </option>
+                                        </select>
+                                    </label>
+
+                                </div>
+
+                                <label class="stay-booking-notes">
+                                    Special Requests
+                                    <textarea name="notes" rows="3" placeholder="Anything we should know?"></textarea>
+                                </label>
+
+                                <button type="submit" class="stay-booking-submit">
+                                    Continue via WhatsApp →
+                                </button>
+
+                                <p class="stay-booking-disclaimer">
+                                    Your booking is subject to availability and
+                                    will be confirmed by our reservations team.
+                                </p>
+
+                            </form>
+
+                        </div>
+
+                        <div class="stay-booking-card stay-booking-ota">
+
+                            <span class="stay-booking-label">BOOK VIA OTA</span>
+
+                            <h4>Prefer Airbnb?</h4>
+
+                            <p>
+                                Explore our listing, check available dates,
+                                and complete your reservation through Airbnb.
+                            </p>
+
+                            <a href="#" id="stayAirbnbLink" target="_blank" rel="noopener noreferrer"
+                                class="stay-airbnb-button">
+                                View on Airbnb ↗
+                            </a>
+
+                            <p class="stay-booking-disclaimer">
+                                Rates and booking policies on Airbnb may differ
+                                from direct reservations.
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -2664,43 +2853,49 @@
 
 
             <div>
+                <h4>Contact</h4>
 
-                <h4>
-                    Contact
-                </h4>
+                <p class="footer-phone">
+                    <a href="tel:+622263179990">
+                        Phone: +62 (22) 63179990
+                    </a>
+                </p>
 
-                <!-- 🔴 TO FILL: FINAL CONTACT DETAILS -->
+                <p class="footer-whatsapp">
+                    <a href="#" class="stay-whatsapp-link" id="footerStayWhatsapp">
+                        Stay: <span id="footerStayNumber"></span>
+                    </a>
 
-                <p>
-                    🔴 [STAY WHATSAPP]
-                    <br>
-                    🔴 [CAFÉ WHATSAPP]
+                    <a href="#" class="cafe-whatsapp-link" id="footerCafeWhatsapp">
+                        Café: <span id="footerCafeNumber"></span>
+                    </a>
                 </p>
 
                 <p>
-                    🔴 [EMAIL]
+                    <a href="#" class="email-link" id="footerEmail">
+                        Email Kaiara
+                    </a>
                 </p>
 
                 <p>
-                    @kaiara.garden
+                    <a href="#" class="instagram-link">
+                        @kaiara.garden
+                    </a>
                 </p>
-
             </div>
 
-        </div>
 
+            <div class="footer-bottom">
 
-        <div class="footer-bottom">
+                <span>
+                    © 2026 Kaiara Garden
+                </span>
 
-            <span>
-                © 2026 Kaiara Garden
-            </span>
+                <span>
+                    A place you’ll be happy to come back to.
+                </span>
 
-            <span>
-                A place you’ll be happy to come back to.
-            </span>
-
-        </div>
+            </div>
 
     </footer>
 

@@ -157,7 +157,7 @@ p {
 }
 
 
-.section-heading > p {
+.section-heading>p {
     max-width: 350px;
 }
 
@@ -395,10 +395,8 @@ p {
     background-color: var(--dark-green);
 
     background-image:
-        linear-gradient(
-            rgba(32, 38, 31, 0.35),
-            rgba(32, 38, 31, 0.48)
-        );
+        linear-gradient(rgba(32, 38, 31, 0.35),
+            rgba(32, 38, 31, 0.48));
 
     background-size: cover;
     background-position: center;
@@ -419,11 +417,9 @@ p {
     z-index: 1;
 
     background:
-        linear-gradient(
-            90deg,
+        linear-gradient(90deg,
             rgba(20, 25, 20, 0.5),
-            transparent 70%
-        );
+            transparent 70%);
 }
 
 
@@ -776,11 +772,9 @@ p {
 
 .placeholder-image {
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #d8d2c5,
-            #b9b5a8
-        );
+            #b9b5a8);
 
     display: flex;
 
@@ -881,7 +875,7 @@ p {
 }
 
 
-.facilities .section-heading > div {
+.facilities .section-heading>div {
     width: 100%;
 }
 
@@ -1087,76 +1081,76 @@ p {
 
 }
 
-    /* MOBILE FACILITY LIST — CONTINUATION */
+/* MOBILE FACILITY LIST — CONTINUATION */
 
-    .facility-grid {
-        display: block;
+.facility-grid {
+    display: block;
 
-        border: none;
-        border-top: 1px solid var(--border);
-    }
+    border: none;
+    border-top: 1px solid var(--border);
+}
 
-    .facility {
-        min-height: 0;
+.facility {
+    min-height: 0;
 
-        padding: 22px 2px;
+    padding: 22px 2px;
 
-        display: grid;
+    display: grid;
 
-        grid-template-columns: 38px 1fr auto;
+    grid-template-columns: 38px 1fr auto;
 
-        align-items: center;
+    align-items: center;
 
-        gap: 12px;
+    gap: 12px;
 
-        border: none;
-        border-bottom: 1px solid var(--border);
+    border: none;
+    border-bottom: 1px solid var(--border);
 
-        background: transparent;
-    }
+    background: transparent;
+}
 
-    .facility-top {
-        display: contents;
-    }
+.facility-top {
+    display: contents;
+}
 
-    .facility-number {
-        grid-column: 1;
-        grid-row: 1;
+.facility-number {
+    grid-column: 1;
+    grid-row: 1;
 
-        font-size: 9px;
-    }
+    font-size: 9px;
+}
 
-    .facility-content {
-        grid-column: 2;
-        grid-row: 1;
+.facility-content {
+    grid-column: 2;
+    grid-row: 1;
 
-        max-width: none;
-    }
+    max-width: none;
+}
 
-    .facility h3 {
-        margin: 0;
+.facility h3 {
+    margin: 0;
 
-        font-size: 24px;
-    }
+    font-size: 24px;
+}
 
-    .facility p {
-        display: none;
-    }
+.facility p {
+    display: none;
+}
 
-    .facility-arrow {
-        grid-column: 3;
-        grid-row: 1;
+.facility-arrow {
+    grid-column: 3;
+    grid-row: 1;
 
-        font-size: 19px;
-    }
+    font-size: 19px;
+}
 
-    .facility:hover {
-        background: transparent;
-    }
+.facility:hover {
+    background: transparent;
+}
 
-    .facility:active .facility-arrow {
-        transform: translateX(5px);
-    }
+.facility:active .facility-arrow {
+    transform: translateX(5px);
+}
 
 
 /* =====================================================
@@ -1199,7 +1193,7 @@ p {
 }
 
 
-.experience-content > p:not(.section-label) {
+.experience-content>p:not(.section-label) {
     max-width: 500px;
 
     margin-bottom: 20px;
@@ -1295,7 +1289,7 @@ p {
 }
 
 
-.cafe-content > p:not(.section-label) {
+.cafe-content>p:not(.section-label) {
     max-width: 500px;
 
     font-size: 15px;
@@ -1437,7 +1431,7 @@ p {
 }
 
 
-.location-grid > div:first-child > p:not(.section-label) {
+.location-grid>div:first-child>p:not(.section-label) {
     max-width: 500px;
 }
 
@@ -2037,10 +2031,8 @@ p {
     background-color: var(--dark-green);
 
     background-image:
-        linear-gradient(
-            rgba(40, 48, 39, 0.55),
-            rgba(40, 48, 39, 0.65)
-        );
+        linear-gradient(rgba(40, 48, 39, 0.55),
+            rgba(40, 48, 39, 0.65));
 
     background-size: cover;
 
@@ -2193,7 +2185,7 @@ p {
 }
 
 
-.footer-grid > div:not(:first-child) a {
+.footer-grid>div:not(:first-child) a {
     display: block;
 
     color:
@@ -2207,7 +2199,7 @@ p {
 }
 
 
-.footer-grid > div:not(:first-child) a:hover {
+.footer-grid>div:not(:first-child) a:hover {
     color: white;
 }
 
@@ -2421,9 +2413,9 @@ p {
         gap: 45px;
     }
 
-    .intro-grid > *,
-    .experience-grid > *,
-    .location-grid > * {
+    .intro-grid>*,
+    .experience-grid>*,
+    .location-grid>* {
         min-width: 0;
     }
 
@@ -2494,8 +2486,7 @@ p {
 
     .gallery-grid {
         grid-template-columns:
-            minmax(0, 1fr)
-            minmax(0, 1fr);
+            minmax(0, 1fr) minmax(0, 1fr);
 
         grid-template-rows:
             220px 220px 220px;
@@ -2514,17 +2505,16 @@ p {
 
     .footer-grid {
         grid-template-columns:
-            minmax(0, 1fr)
-            minmax(0, 1fr);
+            minmax(0, 1fr) minmax(0, 1fr);
 
         gap: 45px;
     }
 
-    .footer-grid > div {
+    .footer-grid>div {
         min-width: 0;
     }
 
-    .footer-grid > div:first-child {
+    .footer-grid>div:first-child {
         grid-column: 1 / -1;
     }
 
@@ -2648,7 +2638,7 @@ p {
         gap: 45px;
     }
 
-    .footer-grid > div:first-child {
+    .footer-grid>div:first-child {
         grid-column: auto;
     }
 
@@ -3132,13 +3122,13 @@ body.loaded {
 }
 
 
-.gallery-photo > span {
+.gallery-photo>span {
     transition:
         transform 0.45s ease;
 }
 
 
-.gallery-photo:hover > span {
+.gallery-photo:hover>span {
     transform:
         scale(1.025);
 }
@@ -3292,7 +3282,7 @@ body.loaded {
 }
 
 
-.room-spec-grid > div {
+.room-spec-grid>div {
     display: flex;
 
     flex-direction: column;
@@ -3874,8 +3864,7 @@ body.room-modal-open {
     scrollbar-width: thin;
 
     scrollbar-color:
-        rgba(48, 56, 47, 0.25)
-        transparent;
+        rgba(48, 56, 47, 0.25) transparent;
 
     transition:
         transform 0.4s ease;
@@ -4399,8 +4388,7 @@ body.about-modal-open {
     scrollbar-width: thin;
 
     scrollbar-color:
-        rgba(47, 57, 48, 0.35)
-        transparent;
+        rgba(47, 57, 48, 0.35) transparent;
 }
 
 
@@ -4856,10 +4844,8 @@ body.facility-modal-open {
 
 .facility-guidelines-content li::before {
     content:
-        counter(
-            facility-guideline,
-            decimal-leading-zero
-        );
+        counter(facility-guideline,
+            decimal-leading-zero);
 
     padding-top: 2px;
 
@@ -4934,7 +4920,7 @@ body.facility-modal-open {
 }
 
 
-.location-grid > * {
+.location-grid>* {
     min-width: 0;
 }
 
@@ -5492,7 +5478,7 @@ body.cafe-modal-open {
     color: var(--dark-green);
 }
 
-.cafe-reservation-header > p:not(.section-label) {
+.cafe-reservation-header>p:not(.section-label) {
     margin-top: 20px;
 
     font-size: 14px;
@@ -5590,16 +5576,12 @@ body.cafe-modal-open {
     padding-right: 28px;
 
     background-image:
-        linear-gradient(
-            45deg,
+        linear-gradient(45deg,
             transparent 50%,
-            var(--dark-green) 50%
-        ),
-        linear-gradient(
-            135deg,
+            var(--dark-green) 50%),
+        linear-gradient(135deg,
             var(--dark-green) 50%,
-            transparent 50%
-        );
+            transparent 50%);
 
     background-position:
         calc(100% - 9px) 50%,
@@ -5858,8 +5840,7 @@ body.cafe-reservation-open {
 
 /* Arrow state when Guidelines are opened */
 
-.facility-guidelines-toggle[aria-expanded="true"]
-.facility-guidelines-arrow {
+.facility-guidelines-toggle[aria-expanded="true"] .facility-guidelines-arrow {
     transform: rotate(180deg);
 }
 
@@ -5939,14 +5920,12 @@ body.cafe-reservation-open {
     border-radius: 2px;
 
     box-shadow:
-        0 30px 80px
-        rgba(0, 0, 0, 0.20);
+        0 30px 80px rgba(0, 0, 0, 0.20);
 
     scrollbar-width: thin;
 
     scrollbar-color:
-        rgba(47, 57, 48, 0.35)
-        transparent;
+        rgba(47, 57, 48, 0.35) transparent;
 }
 
 
@@ -6009,12 +5988,12 @@ body.cafe-reservation-open {
 }
 
 
-.gathering-modal-content > .section-label {
+.gathering-modal-content>.section-label {
     margin-bottom: 14px;
 }
 
 
-.gathering-modal-content > h2 {
+.gathering-modal-content>h2 {
     max-width: 650px;
 
     margin: 0;
@@ -6030,7 +6009,7 @@ body.cafe-reservation-open {
 }
 
 
-.gathering-modal-content > h2 + p {
+.gathering-modal-content>h2+p {
     max-width: 680px;
 
     margin-top: 24px;
@@ -6179,7 +6158,7 @@ body.cafe-reservation-open {
 }
 
 
-.gathering-duration > span {
+.gathering-duration>span {
     margin-bottom: 28px;
 
     font-size: 9px;
@@ -6293,11 +6272,11 @@ body.gathering-modal-open {
             72px 24px 45px;
     }
 
-    .gathering-modal-content > h2 {
+    .gathering-modal-content>h2 {
         font-size: 40px;
     }
 
-    .gathering-modal-content > h2 + p {
+    .gathering-modal-content>h2+p {
         font-size: 14px;
     }
 
@@ -6331,7 +6310,7 @@ body.gathering-modal-open {
         padding: 22px;
     }
 
-    .gathering-duration > span {
+    .gathering-duration>span {
         margin-bottom: 18px;
     }
 
@@ -6404,14 +6383,12 @@ body.gathering-modal-open {
     border-radius: 2px;
 
     box-shadow:
-        0 30px 80px
-        rgba(0, 0, 0, 0.20);
+        0 30px 80px rgba(0, 0, 0, 0.20);
 
     scrollbar-width: thin;
 
     scrollbar-color:
-        rgba(47, 57, 48, 0.35)
-        transparent;
+        rgba(47, 57, 48, 0.35) transparent;
 }
 
 
@@ -6463,12 +6440,12 @@ body.gathering-modal-open {
 
 /* CONTENT */
 
-.event-modal-content > .section-label {
+.event-modal-content>.section-label {
     margin-bottom: 12px;
 }
 
 
-.event-modal-content > h2 {
+.event-modal-content>h2 {
     max-width: 580px;
 
     margin:
@@ -6508,7 +6485,7 @@ body.gathering-modal-open {
    Notes + Interests span the whole form.
 */
 
-#eventForm > .cafe-form-field:has(textarea),
+#eventForm>.cafe-form-field:has(textarea),
 .event-interest-fieldset {
     grid-column: 1 / -1;
 }
@@ -6573,7 +6550,7 @@ body.gathering-modal-open {
 
 /* SUBMIT */
 
-#eventForm > button[type="submit"] {
+#eventForm>button[type="submit"] {
     grid-column: 1 / -1;
 
     justify-self: start;
@@ -6625,7 +6602,7 @@ body.event-modal-open {
         font-size: 24px;
     }
 
-    .event-modal-content > h2 {
+    .event-modal-content>h2 {
         margin-right: 40px;
 
         font-size: 40px;
@@ -6637,10 +6614,10 @@ body.event-modal-open {
         gap: 22px;
     }
 
-    #eventForm > .cafe-form-field,
-    #eventForm > .cafe-form-field:has(textarea),
+    #eventForm>.cafe-form-field,
+    #eventForm>.cafe-form-field:has(textarea),
     .event-interest-fieldset,
-    #eventForm > button[type="submit"] {
+    #eventForm>button[type="submit"] {
         grid-column: auto;
     }
 
@@ -6652,7 +6629,7 @@ body.event-modal-open {
         gap: 12px;
     }
 
-    #eventForm > button[type="submit"] {
+    #eventForm>button[type="submit"] {
         width: 100%;
 
         justify-content: center;
@@ -7134,4 +7111,823 @@ body.event-modal-open {
         grid-row: auto;
     }
 
+}
+
+
+/* =========================================
+   KAIARA — MOBILE GALLERY (11 PHOTOS)
+   ========================================= */
+
+/* Desktop: sembunyikan carousel mobile */
+.mobile-gallery,
+.mobile-gallery-counter {
+    display: none;
+}
+
+@media (max-width: 600px) {
+
+    /* Sembunyikan grid 5 foto */
+    #mainGallery {
+        display: none;
+    }
+
+    /* Tampilkan carousel 11 foto */
+    #mobileGallery {
+        display: flex;
+        gap: 12px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+
+        padding-bottom: 4px;
+    }
+
+    #mobileGallery::-webkit-scrollbar {
+        display: none;
+    }
+
+    #mobileGallery .mobile-gallery-item {
+        flex: 0 0 86%;
+        height: 300px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0;
+        border: none;
+
+        background: #dcd9ce;
+        color: #777363;
+
+        cursor: pointer;
+        overflow: hidden;
+
+        scroll-snap-align: start;
+    }
+
+    #mobileGallery .mobile-gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    #mobileGallery .mobile-gallery-item span {
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        opacity: 0.6;
+    }
+
+    /* Counter di bawah carousel */
+    #mobileGalleryCounter {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 5px;
+
+        margin-top: 10px;
+
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+    }
+}
+
+/* =========================================
+   KAIARA — GATHERING MOBILE CAROUSEL
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    #gatheringGallery {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 12px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    #gatheringGallery::-webkit-scrollbar {
+        display: none;
+    }
+
+    #gatheringGallery .experience-gallery-thumbnails {
+        display: contents;
+    }
+
+    #gatheringGallery .experience-gallery-main,
+    #gatheringGallery .experience-gallery-thumbnails button {
+        display: block;
+        flex: 0 0 86%;
+        width: 86%;
+        min-width: 86%;
+        height: 300px;
+        min-height: 300px;
+
+        margin: 0;
+        padding: 0;
+        scroll-snap-align: start;
+    }
+
+    #gatheringGallery button img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+/* =========================================
+   KAIARA — GATHERING MOBILE SWIPE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    #gatheringGallery {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 12px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    #gatheringGallery::-webkit-scrollbar {
+        display: none;
+    }
+
+    #gatheringGallery>button {
+        flex: 0 0 86%;
+        width: 86%;
+        height: 300px;
+        min-height: 300px;
+
+        scroll-snap-align: start;
+    }
+
+    #gatheringGallery>button img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+/* =========================================
+   GATHERING MOBILE COUNTER
+   ========================================= */
+
+.gathering-gallery-counter {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .gathering-gallery-counter {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 5px;
+
+        margin-top: 10px;
+
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+    }
+}
+
+/* GATHERING — COMPACT MOBILE COUNTER */
+
+@media (max-width: 600px) {
+    #gatheringGallery {
+        margin-bottom: 0 !important;
+    }
+
+    #gatheringGalleryCounter {
+        margin-top: 6px !important;
+        padding-top: 0;
+        padding-bottom: 0;
+
+        font-size: 10px;
+        line-height: 1.2;
+        letter-spacing: 0.04em;
+    }
+}
+
+/* =========================================
+   KAIARA CAFÉ — PHOTO GALLERY
+========================================= */
+
+/* DESKTOP */
+.cafe-gallery-wrapper {
+    width: 100%;
+    min-width: 0;
+}
+
+.cafe-gallery {
+    width: 100%;
+    min-width: 0;
+}
+
+.cafe-gallery-item {
+    display: none;
+    position: relative;
+    overflow: hidden;
+
+    background: #e4e6dd;
+    border-radius: 10px;
+}
+
+/* Placeholder sebelum foto asli tersedia */
+.cafe-gallery-item::before {
+    content: "KAIARA GARDEN";
+
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    color: #828a7b;
+
+    pointer-events: none;
+}
+
+/* Sembunyikan gambar yang belum berhasil dimuat */
+.cafe-gallery-item img {
+    display: none;
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Tampilkan gambar asli setelah berhasil dimuat */
+.cafe-gallery-item img.is-loaded {
+    display: block;
+}
+
+.cafe-gallery-item:first-child {
+    display: block;
+    height: 580px;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+    .cafe-gallery-wrapper {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .cafe-gallery {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 12px;
+
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: 0;
+
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .cafe-gallery::-webkit-scrollbar {
+        display: none;
+    }
+
+    .cafe-gallery-item,
+    .cafe-gallery-item:first-child {
+        display: block;
+        flex: 0 0 86%;
+        width: 86%;
+        min-width: 86%;
+        height: 300px;
+        min-height: 300px;
+
+        margin: 0;
+        padding: 0;
+
+        scroll-snap-align: start;
+        overflow: hidden;
+    }
+
+    .cafe-gallery-item img.is-loaded {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .cafe-gallery-counter {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 5px;
+
+        margin-top: 6px;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+    }
+}
+
+/* =========================================
+   KAIARA CAFÉ — DESKTOP GALLERY HOVER
+========================================= */
+
+@media (min-width: 601px) {
+
+    #cafeGallery .cafe-gallery-item:first-child {
+        position: relative;
+        cursor: zoom-in;
+    }
+
+    #cafeGallery .cafe-gallery-item:first-child::after {
+        content: "VIEW GALLERY ↗";
+
+        position: absolute;
+        right: 22px;
+        bottom: 22px;
+
+        padding: 10px 14px;
+
+        background: rgba(250, 249, 245, 0.92);
+        color: var(--dark-green);
+
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+
+        opacity: 0;
+        transform: translateY(5px);
+
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+
+        pointer-events: none;
+        z-index: 3;
+    }
+
+    #cafeGallery .cafe-gallery-item:first-child:hover::after,
+    #cafeGallery .cafe-gallery-item:first-child:focus-within::after {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#cafeGallery .cafe-gallery-item:first-child::after {
+    visibility: visible;
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+/* =========================================
+   CAFÉ GALLERY — COUNTER REFINEMENT
+========================================= */
+
+#cafe .cafe-gallery-counter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    width: 100%;
+    margin-top: 7px;
+
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+
+    color: var(--muted);
+    text-align: right;
+}
+
+@media (min-width: 601px) {
+    #cafe .cafe-gallery-counter {
+        display: none;
+    }
+}
+
+/* =========================================
+   KAIARA CAFÉ — MODAL IMAGE REFINEMENT
+========================================= */
+
+#cafeModal .cafe-modal-image {
+    position: relative;
+    width: 100%;
+    height: 340px;
+    overflow: hidden;
+
+    background: #e4e6dd;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: zoom-in;
+}
+
+#cafeModal .cafe-modal-image #cafeModalImage {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #828a7b;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-align: center;
+}
+
+#cafeModal .cafe-modal-image #cafeModalImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    #cafeModal .cafe-modal-image {
+        height: 230px;
+        border-radius: 8px;
+    }
+
+    #cafeModal .cafe-modal-image #cafeModalImage {
+        font-size: 10px;
+    }
+
+}
+
+/* =========================================
+   KAIARA CAFÉ — MODAL CONTENT REFINEMENT
+========================================= */
+
+#cafeModal .cafe-modal-content {
+    padding: 36px 42px 42px;
+}
+
+#cafeModal .cafe-modal-content h2 {
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    margin-bottom: 18px;
+}
+
+#cafeModal .cafe-modal-content p {
+    font-size: 14px;
+    line-height: 1.85;
+    font-weight: 400;
+}
+
+#cafeModal .cafe-modal-content .cafe-modal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+/* Mobile refinement */
+@media (max-width: 600px) {
+
+    #cafeModal .cafe-modal-content {
+        padding: 24px 22px 30px;
+    }
+
+    #cafeModal .cafe-modal-content h2 {
+        font-size: 27px;
+        line-height: 1.25;
+        margin-bottom: 14px;
+    }
+
+    #cafeModal .cafe-modal-content p {
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    #cafeModal .cafe-modal-content .cafe-modal-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin-top: 24px;
+    }
+
+    #cafeModal .cafe-modal-content .cafe-modal-actions a,
+    #cafeModal .cafe-modal-content .cafe-modal-actions button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* =========================================
+   FAQ — CENTER TABS ON MOBILE ONLY
+========================================= */
+
+@media (max-width: 600px) {
+    #faq .faq-tabs {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/* =========================================
+   FOOTER — WHATSAPP CONTACTS
+========================================= */
+
+.footer .footer-whatsapp a {
+    display: block;
+    width: fit-content;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.footer .footer-whatsapp a:hover {
+    color: #fff;
+}
+
+/* ==========================================
+   STAY BOOKING OPTIONS
+========================================== */
+
+.stay-booking-options {
+    width: min(100%, 980px);
+    margin: 38px auto 0;
+    text-align: left;
+}
+
+.stay-booking-options[hidden] {
+    display: none !important;
+}
+
+.stay-booking-heading {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.stay-booking-heading h3 {
+    font-family: inherit;
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 400;
+    margin: 8px 0;
+}
+
+.stay-booking-heading p {
+    line-height: 1.7;
+}
+
+.stay-booking-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 18px;
+    align-items: start;
+}
+
+.stay-booking-card {
+    background: #f7f5ef;
+    color: #303a30;
+    border-radius: 12px;
+    padding: clamp(22px, 3vw, 34px);
+}
+
+.stay-booking-label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.stay-booking-card h4 {
+    font-size: 26px;
+    font-weight: 400;
+    margin: 0 0 12px;
+}
+
+.stay-booking-card > p {
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+.stay-booking-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.stay-booking-card label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.stay-booking-card input,
+.stay-booking-card select,
+.stay-booking-card textarea {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    border: 1px solid #d9ddd4;
+    border-radius: 5px;
+    padding: 12px;
+    background: #fff;
+    color: #303a30;
+    font: inherit;
+    font-size: 13px;
+}
+
+.stay-booking-card input:focus,
+.stay-booking-card select:focus,
+.stay-booking-card textarea:focus {
+    outline: 1px solid #60785e;
+    border-color: #60785e;
+}
+
+.stay-booking-notes {
+    margin-top: 16px;
+}
+
+.stay-booking-submit,
+.stay-airbnb-button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 22px;
+    padding: 14px 18px;
+    border: 1px solid #38543c;
+    border-radius: 5px;
+    background: #38543c;
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .2s ease;
+}
+
+.stay-booking-submit:hover,
+.stay-airbnb-button:hover {
+    background: #273e2b;
+}
+
+.stay-booking-disclaimer {
+    margin: 15px 0 0 !important;
+    font-size: 11px !important;
+    line-height: 1.7 !important;
+    opacity: .75;
+}
+
+@media (max-width: 768px) {
+    .stay-booking-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stay-booking-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .stay-booking-options {
+        margin-top: 30px;
+    }
+}
+
+/* CAFÉ MODAL — ALIGN ACTION BUTTONS */
+
+#cafeModal .cafe-modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+#cafeModal .cafe-modal-actions .btn {
+    margin-top: 0;
+}
+
+#cafeModal .cafe-modal-actions .text-link {
+    margin-top: 0;
+    padding-bottom: 4px;
+}
+
+@media (max-width: 600px) {
+    #cafeModal .cafe-modal-actions {
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    #cafeModal .cafe-modal-actions a {
+        width: auto;
+        text-align: left;
+    }
+}
+
+/* PHOTO INTERACTIONS — POINTER CURSOR */
+
+.gallery-photo,
+.experience-gallery button,
+#cafeGallery .cafe-gallery-item,
+#cafeModal .cafe-modal-image {
+    cursor: pointer;
+}
+
+/* =========================================
+   CAFÉ MODAL — FIX LINK UNDERLINE
+========================================= */
+
+#cafeModal .cafe-modal-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    column-gap: 32px;
+    row-gap: 16px;
+    margin-top: 36px;
+}
+
+#cafeModal .cafe-modal-actions .cafe-menu-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: auto;
+    min-height: 54px;
+    padding: 0 28px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#cafeModal .cafe-modal-actions .cafe-reservation-link {
+    display: inline-block;
+    flex: 0 0 auto;
+    width: fit-content;
+
+    min-height: 0;
+    height: auto;
+
+    margin: 0 0 0 12px;
+    padding: 0 0 4px;
+
+    line-height: 1.4;
+    white-space: nowrap;
+
+    border-bottom: 1px solid var(--dark-green);
+}
+
+@media (max-width: 600px) {
+    #cafeModal .cafe-modal-actions {
+        column-gap: 20px;
+        row-gap: 14px;
+        margin-top: 30px;
+    }
+
+    #cafeModal .cafe-modal-actions .cafe-menu-button {
+        padding: 0 20px;
+    }
 }
