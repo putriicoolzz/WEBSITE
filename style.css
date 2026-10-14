@@ -7735,7 +7735,7 @@ body.event-modal-open {
     display: grid;
     grid-template-columns: 1.25fr 1fr;
     gap: 22px;
-    align-items: stretch;
+    align-items: start;
 }
 
 .stay-booking-card {
@@ -7858,7 +7858,7 @@ body.event-modal-open {
 /* AIRBNB CARD */
 
 .stay-booking-ota .stay-airbnb-button {
-    margin-top: auto;
+    margin-top: 24px;
 }
 
 .stay-booking-ota .stay-airbnb-button[aria-disabled="true"] {

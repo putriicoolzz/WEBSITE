@@ -39,6 +39,10 @@ const KAIARA_CONFIG = {
     /* Stay booking */
     airbnbUrl: "abc",
 
+    /* Stay Reservation API */
+    stayReservationApi:
+        "https://script.google.com/macros/s/AKfycbzt8VySMS90A2tMjrLiBY70A5dPD3-VvChFL2gbV-Xa-PI5bcDhvtacnsDoKJACbCRVkA/exec"
+
 };
 
 
