@@ -6682,7 +6682,7 @@ document.querySelectorAll(
 syncGlobalModalState();
 
 /* =========================================
-   CAFE & EVENTS — PREVENT PAST BOOKINGS
+   CAFE & EVENTS — WIB DATE & TIME VALIDATION
 ========================================= */
 
 (function () {
@@ -6693,30 +6693,41 @@ syncGlobalModalState();
     const eventDate = document.getElementById("eventDate");
     const eventForm = document.getElementById("eventForm");
 
-    function todayString() {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, "0");
-        const day = String(now.getDate()).padStart(2, "0");
+    function getWIBNow() {
+        const parts = new Intl.DateTimeFormat("en-GB", {
+            timeZone: "Asia/Jakarta",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hourCycle: "h23"
+        }).formatToParts(new Date());
 
-        return `${year}-${month}-${day}`;
+        const values = Object.fromEntries(
+            parts.filter(part => part.type !== "literal")
+                .map(part => [part.type, part.value])
+        );
+
+        return {
+            date: `${values.year}-${values.month}-${values.day}`,
+            minutes: Number(values.hour) * 60 + Number(values.minute)
+        };
     }
 
     function updateBookingLimits() {
-        const today = todayString();
-        const now = new Date();
-        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+        const wib = getWIBNow();
 
         if (cafeDate) {
-            cafeDate.min = today;
+            cafeDate.min = wib.date;
 
-            if (cafeDate.value && cafeDate.value < today) {
+            if (cafeDate.value && cafeDate.value < wib.date) {
                 cafeDate.value = "";
             }
         }
 
         if (cafeDate && cafeTime) {
-            const isToday = cafeDate.value === today;
+            const isToday = cafeDate.value === wib.date;
 
             Array.from(cafeTime.options).forEach(option => {
                 if (!option.value) return;
@@ -6724,7 +6735,7 @@ syncGlobalModalState();
                 const [hours, minutes] = option.value.split(":").map(Number);
                 const optionMinutes = hours * 60 + minutes;
 
-                option.disabled = isToday && optionMinutes <= currentMinutes;
+                option.disabled = isToday && optionMinutes <= wib.minutes;
             });
 
             if (cafeTime.selectedOptions[0]?.disabled) {
@@ -6733,39 +6744,47 @@ syncGlobalModalState();
         }
 
         if (eventDate) {
-            eventDate.min = today;
+            eventDate.min = wib.date;
 
-            if (eventDate.value && eventDate.value < today) {
+            if (eventDate.value && eventDate.value < wib.date) {
                 eventDate.value = "";
             }
         }
     }
 
     cafeDate?.addEventListener("change", updateBookingLimits);
-
     cafeTime?.addEventListener("focus", updateBookingLimits);
 
     cafeForm?.addEventListener("submit", function (event) {
         updateBookingLimits();
 
+        const wib = getWIBNow();
+        const selectedTime = cafeTime?.value || "";
+        const selectedMinutes = selectedTime
+            ? selectedTime.split(":").map(Number).reduce(
+                (hours, minutes) => hours * 60 + minutes
+            )
+            : -1;
+
         if (
-            !cafeDate.value ||
-            !cafeTime.value ||
-            cafeDate.value < todayString()
+            !cafeDate?.value ||
+            !selectedTime ||
+            cafeDate.value < wib.date ||
+            (cafeDate.value === wib.date && selectedMinutes <= wib.minutes)
         ) {
             event.preventDefault();
             event.stopImmediatePropagation();
-            alert("Please select a valid future reservation date and time.");
+            alert("Please select a valid future reservation date and time (WIB).");
         }
     }, true);
 
     eventForm?.addEventListener("submit", function (event) {
         updateBookingLimits();
 
-        if (!eventDate.value || eventDate.value < todayString()) {
+        if (!eventDate?.value || eventDate.value < getWIBNow().date) {
             event.preventDefault();
             event.stopImmediatePropagation();
-            alert("Please select a valid event date.");
+            alert("Please select a valid event date (WIB).");
         }
     }, true);
 
