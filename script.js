@@ -6486,7 +6486,10 @@ if (stayAirbnbLink) {
 }
 
 
-/* DATE VALIDATION */
+
+/* =========================================
+   STAY — WIB DATE VALIDATION
+========================================= */
 
 const stayCheckin =
     document.getElementById("stayCheckin");
@@ -6494,37 +6497,87 @@ const stayCheckin =
 const stayCheckout =
     document.getElementById("stayCheckout");
 
-function localDateString(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
+/* CURRENT DATE IN BANDUNG (WIB) */
+
+function getStayWIBToday() {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Asia/Jakarta",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+    }).formatToParts(new Date());
+
+    const values = Object.fromEntries(
+        parts
+            .filter(part => part.type !== "literal")
+            .map(part => [part.type, part.value])
+    );
+
+    return `${values.year}-${values.month}-${values.day}`;
 }
 
-const today = localDateString(new Date());
+/* NEXT CALENDAR DAY */
+
+function getStayNextDay(dateString) {
+    const date = new Date(`${dateString}T12:00:00Z`);
+    date.setUTCDate(date.getUTCDate() + 1);
+    return date.toISOString().slice(0, 10);
+}
+
+/* UPDATE CHECK-IN & CHECK-OUT LIMITS */
+
+function refreshStayDateLimits() {
+    if (!stayCheckin || !stayCheckout) return;
+
+    const todayWIB = getStayWIBToday();
+
+    stayCheckin.min = todayWIB;
+
+    if (stayCheckin.value && stayCheckin.value < todayWIB) {
+        stayCheckin.value = "";
+        stayCheckout.value = "";
+    }
+
+    if (stayCheckin.value) {
+        stayCheckout.min = getStayNextDay(stayCheckin.value);
+    } else {
+        stayCheckout.min = todayWIB;
+    }
+
+    if (
+        stayCheckout.value &&
+        stayCheckout.value < stayCheckout.min
+    ) {
+        stayCheckout.value = "";
+    }
+}
+
+/* REFRESH WHEN CHECK-IN CHANGES */
 
 if (stayCheckin && stayCheckout) {
-
-    stayCheckin.min = today;
-    stayCheckout.min = today;
-
-    stayCheckin.addEventListener("change", () => {
-
-        if (!stayCheckin.value) return;
-
-        const nextDay = new Date(
-            `${stayCheckin.value}T12:00:00`
-        );
-
-        nextDay.setDate(nextDay.getDate() + 1);
-
-        stayCheckout.min = localDateString(nextDay);
-
-        if (stayCheckout.value <= stayCheckin.value) {
-            stayCheckout.value = "";
-        }
-    });
+    stayCheckin.addEventListener(
+        "change",
+        refreshStayDateLimits
+    );
 }
+
+/* REFRESH WHEN RETURNING TO WEBSITE */
+
+document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+        refreshStayDateLimits();
+    }
+});
+
+window.addEventListener(
+    "focus",
+    refreshStayDateLimits
+);
+
+/* INITIAL VALIDATION */
+
+refreshStayDateLimits();
+
 
 /* =========================================
    STAY INQUIRY — GOOGLE SHEETS TRANSPORT
@@ -6561,14 +6614,14 @@ stayBookingForm.addEventListener("submit", async event => {
 
     const data = new FormData(stayBookingForm);
 
+
     const checkin = data.get("checkin");
     const checkout = data.get("checkout");
-    const currentDate = localDateString(new Date());
 
-    stayCheckin.min = currentDate;
+    const currentDateWIB = getStayWIBToday();
 
-    if (checkin < currentDate) {
-        alert("Check-in date cannot be in the past.");
+    if (checkin < currentDateWIB) {
+        alert("Check-in date cannot be in the past (WIB).");
         return;
     }
 
@@ -6576,6 +6629,7 @@ stayBookingForm.addEventListener("submit", async event => {
         alert("Check-out must be after check-in.");
         return;
     }
+
 
     /* PREPARE GOOGLE SHEETS INQUIRY */
 
