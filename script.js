@@ -6450,12 +6450,16 @@ function showStayBookingOptions() {
 
     if (!stayBookingOptions) return;
 
-    stayBookingOptions.hidden = false;
+    const isCurrentlyOpen = !stayBookingOptions.hidden;
 
-    stayBookingOptions.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
+    stayBookingOptions.hidden = isCurrentlyOpen;
+
+    if (!isCurrentlyOpen) {
+        stayBookingOptions.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
 }
 
 if (stayBookingToggle) {
@@ -6522,59 +6526,128 @@ if (stayCheckin && stayCheckout) {
     });
 }
 
+/* =========================================
+   STAY INQUIRY — GOOGLE SHEETS TRANSPORT
+========================================= */
 
-/* DIRECT BOOKING FORM */
+function sendStayInquiryToSheets(payload) {
+    const apiUrl = KAIARA_CONFIG.stayInquiryApi;
 
-if (stayBookingForm) {
-
-    stayBookingForm.addEventListener("submit", event => {
-
-        event.preventDefault();
-
-        if (!stayBookingForm.reportValidity()) return;
-
-        const data = new FormData(stayBookingForm);
-
-        const checkin = data.get("checkin");
-        const checkout = data.get("checkout");
-
-        if (checkout <= checkin) {
-            alert("Check-out must be after check-in.");
-            return;
-        }
-
-        const message = [
-            "Hello Kaiara Garden!",
-            "",
-            "I'd like to enquire about a stay.",
-            "",
-            `Name: ${data.get("guestName")}`,
-            `WhatsApp: ${data.get("guestPhone")}`,
-            `Check-in: ${checkin}`,
-            `Check-out: ${checkout}`,
-            `Guests: ${data.get("guests")}`,
-            `Preferred Room: ${data.get("room")}`,
-            `Occasion: ${data.get("occasion") || "-"}`,
-            `Special Requests: ${data.get("notes") || "-"}`,
-            "",
-            "Could you please help me check availability and rates?",
-            "",
-            "Thank you!"
-        ].join("\n");
-
-        const url = makeWhatsAppUrl(
-            KAIARA_CONFIG.stayWhatsapp,
-            message
+    if (!apiUrl) {
+        return Promise.reject(
+            new Error("Stay Inquiry API is not configured.")
         );
+    }
 
-        if (url === "#") {
-            alert("Our reservation contact is not available yet.");
-            return;
-        }
-
-        window.open(url, "_blank", "noopener");
+    return fetch(apiUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "text/plain;charset=UTF-8"
+        },
+        body: JSON.stringify(payload)
     });
 }
+
+/* STAY DIRECT BOOKING FORM - DIRECT & AIRBNB */
+
+stayBookingForm.addEventListener("submit", async event => {
+
+    event.preventDefault();
+
+    refreshStayDateLimits();
+
+    if (!stayBookingForm.reportValidity()) return;
+
+    const data = new FormData(stayBookingForm);
+
+    const checkin = data.get("checkin");
+    const checkout = data.get("checkout");
+    const currentDate = localDateString(new Date());
+
+    stayCheckin.min = currentDate;
+
+    if (checkin < currentDate) {
+        alert("Check-in date cannot be in the past.");
+        return;
+    }
+
+    if (checkout <= checkin) {
+        alert("Check-out must be after check-in.");
+        return;
+    }
+
+    /* PREPARE GOOGLE SHEETS INQUIRY */
+
+    const requestId =
+        "KAI-ST-" +
+        crypto.randomUUID()
+            .replace(/-/g, "")
+            .slice(0, 8)
+            .toUpperCase();
+
+    const stayInquiryPayload = {
+        requestId: requestId,
+        guestName: data.get("guestName"),
+        guestPhone: data.get("guestPhone"),
+        checkin: checkin,
+        checkout: checkout,
+        guests: Number(data.get("guests")),
+        room: data.get("room"),
+        occasion: data.get("occasion") || "",
+        notes: data.get("notes") || ""
+    };
+
+    const message = [
+        "Hello Kaiara Garden!",
+        "",
+        "I'd like to enquire about a stay.",
+        "",
+        `Name: ${data.get("guestName")}`,
+        `WhatsApp: ${data.get("guestPhone")}`,
+        `Check-in: ${checkin}`,
+        `Check-out: ${checkout}`,
+        `Guests: ${data.get("guests")}`,
+        `Preferred Room: ${data.get("room")}`,
+        `Occasion: ${data.get("occasion") || "-"}`,
+        `Special Requests: ${data.get("notes") || "-"}`,
+        "",
+        "Could you please help me check availability and rates?",
+        "",
+        "Thank you!"
+    ].join("\n");
+
+    const url = makeWhatsAppUrl(
+        KAIARA_CONFIG.stayWhatsapp,
+        message
+    );
+
+    if (url === "#") {
+        alert("Our reservation contact is not available yet.");
+        return;
+    }
+
+    /* OPEN WHATSAPP FIRST */
+
+    window.open(url, "_blank", "noopener");
+
+    /* SEND INQUIRY TO GOOGLE SHEETS */
+
+    try {
+        await sendStayInquiryToSheets(stayInquiryPayload);
+
+        console.log(
+            "Stay inquiry sent to API (storage not verified):",
+            stayInquiryPayload.requestId
+        );
+
+    } catch (error) {
+        console.error(
+            "Unable to send stay inquiry:",
+            error
+        );
+    }
+});
 
 /* =========================================
    STAY BOOKING — UNIFIED NAVIGATION
@@ -6607,6 +6680,103 @@ document.querySelectorAll(
 ===================================================== */
 
 syncGlobalModalState();
+
+/* =========================================
+   CAFE & EVENTS — PREVENT PAST BOOKINGS
+========================================= */
+
+(function () {
+    const cafeDate = document.getElementById("cafeReservationDate");
+    const cafeTime = document.getElementById("cafeReservationTime");
+    const cafeForm = document.getElementById("cafeReservationForm");
+
+    const eventDate = document.getElementById("eventDate");
+    const eventForm = document.getElementById("eventForm");
+
+    function todayString() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+    }
+
+    function updateBookingLimits() {
+        const today = todayString();
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+        if (cafeDate) {
+            cafeDate.min = today;
+
+            if (cafeDate.value && cafeDate.value < today) {
+                cafeDate.value = "";
+            }
+        }
+
+        if (cafeDate && cafeTime) {
+            const isToday = cafeDate.value === today;
+
+            Array.from(cafeTime.options).forEach(option => {
+                if (!option.value) return;
+
+                const [hours, minutes] = option.value.split(":").map(Number);
+                const optionMinutes = hours * 60 + minutes;
+
+                option.disabled = isToday && optionMinutes <= currentMinutes;
+            });
+
+            if (cafeTime.selectedOptions[0]?.disabled) {
+                cafeTime.value = "";
+            }
+        }
+
+        if (eventDate) {
+            eventDate.min = today;
+
+            if (eventDate.value && eventDate.value < today) {
+                eventDate.value = "";
+            }
+        }
+    }
+
+    cafeDate?.addEventListener("change", updateBookingLimits);
+
+    cafeTime?.addEventListener("focus", updateBookingLimits);
+
+    cafeForm?.addEventListener("submit", function (event) {
+        updateBookingLimits();
+
+        if (
+            !cafeDate.value ||
+            !cafeTime.value ||
+            cafeDate.value < todayString()
+        ) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            alert("Please select a valid future reservation date and time.");
+        }
+    }, true);
+
+    eventForm?.addEventListener("submit", function (event) {
+        updateBookingLimits();
+
+        if (!eventDate.value || eventDate.value < todayString()) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            alert("Please select a valid event date.");
+        }
+    }, true);
+
+    document.addEventListener("visibilitychange", function () {
+        if (!document.hidden) updateBookingLimits();
+    });
+
+    window.addEventListener("focus", updateBookingLimits);
+
+    updateBookingLimits();
+})();
 
 
 /* =====================================================
