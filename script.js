@@ -6828,13 +6828,27 @@ syncGlobalModalState();
         const wib = getWIBNow();
 
         if (cafeDate) {
-            cafeDate.min = wib.date;
-            cafeDate.max = `${Number(wib.date.slice(0, 4)) + 2}-12-31`;
+            if (cafeDate.min !== wib.date) {
+                cafeDate.min = wib.date;
+            }
+
+            const maxDate = `${Number(wib.date.slice(0, 4)) + 2}-12-31`;
+
+            if (cafeDate.max !== maxDate) {
+                cafeDate.max = maxDate;
+            }
         }
 
         if (eventDate) {
-            eventDate.min = wib.date;
-            eventDate.max = `${Number(wib.date.slice(0, 4)) + 2}-12-31`;
+            if (eventDate.min !== wib.date) {
+                eventDate.min = wib.date;
+            }
+
+            const maxDate = `${Number(wib.date.slice(0, 4)) + 2}-12-31`;
+
+            if (eventDate.max !== maxDate) {
+                eventDate.max = maxDate;
+            }
         }
 
         if (cafeDate && cafeTime) {
