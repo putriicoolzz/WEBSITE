@@ -6485,8 +6485,6 @@ if (stayAirbnbLink) {
     }
 }
 
-
-
 /* =========================================
    STAY — WIB DATE VALIDATION
 ========================================= */
@@ -6552,14 +6550,21 @@ function refreshStayDateLimits() {
     }
 }
 
-/* REFRESH WHEN CHECK-IN CHANGES */
+
+/* REFRESH WHEN CHECK-IN IS FINISHED */
 
 if (stayCheckin && stayCheckout) {
-    stayCheckin.addEventListener(
-        "change",
-        refreshStayDateLimits
-    );
+    stayCheckin.addEventListener("blur", () => {
+        refreshStayDateLimits();
+    });
+
+    stayCheckin.addEventListener("change", () => {
+        if (document.activeElement !== stayCheckin) {
+            refreshStayDateLimits();
+        }
+    });
 }
+
 
 /* REFRESH WHEN RETURNING TO WEBSITE */
 
@@ -6584,7 +6589,7 @@ refreshStayDateLimits();
 ========================================= */
 
 function sendStayInquiryToSheets(payload) {
-    const apiUrl = KAIARA_CONFIG.stayInquiryApi;
+    const apiUrl = KAIARA_CONFIG.stayReservationApi;
 
     if (!apiUrl) {
         return Promise.reject(
@@ -6627,6 +6632,56 @@ stayBookingForm.addEventListener("submit", async event => {
 
     if (checkout <= checkin) {
         alert("Check-out must be after check-in.");
+        return;
+    }
+
+    /* VALIDATE STAY DATA BEFORE API SUBMISSION */
+
+    const guestName = String(data.get("guestName") || "").trim();
+    const guestPhone = String(data.get("guestPhone") || "").trim();
+    const guestCount = Number(data.get("guests"));
+
+    if (!guestName || guestName.length > 120) {
+        alert("Please enter a valid guest name.");
+        return;
+    }
+
+    if (!/^\+?[0-9 ()-]{8,22}$/.test(guestPhone)) {
+        alert("Please enter a valid WhatsApp number.");
+        return;
+    }
+
+    if (
+        !Number.isInteger(guestCount) ||
+        guestCount < 1 ||
+        guestCount > 20
+    ) {
+        alert("Please enter a valid number of guests (1–20).");
+        return;
+    }
+
+    const isRealDate = value => {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+
+        const parsed = new Date(value + "T00:00:00Z");
+
+        return (
+            !Number.isNaN(parsed.getTime()) &&
+            parsed.toISOString().slice(0, 10) === value
+        );
+    };
+
+    if (!isRealDate(checkin) || !isRealDate(checkout)) {
+        alert("Please enter valid check-in and check-out dates.");
+        return;
+    }
+
+    if (
+        String(data.get("room") || "").length > 120 ||
+        String(data.get("occasion") || "").length > 120 ||
+        String(data.get("notes") || "").length > 1000
+    ) {
+        alert("Booking information is too long.");
         return;
     }
 
@@ -6774,10 +6829,12 @@ syncGlobalModalState();
 
         if (cafeDate) {
             cafeDate.min = wib.date;
+            cafeDate.max = `${Number(wib.date.slice(0, 4)) + 2}-12-31`;
+        }
 
-            if (cafeDate.value && cafeDate.value < wib.date) {
-                cafeDate.value = "";
-            }
+        if (eventDate) {
+            eventDate.min = wib.date;
+            eventDate.max = `${Number(wib.date.slice(0, 4)) + 2}-12-31`;
         }
 
         if (cafeDate && cafeTime) {
@@ -6796,14 +6853,21 @@ syncGlobalModalState();
                 cafeTime.value = "";
             }
         }
+    }
 
-        if (eventDate) {
-            eventDate.min = wib.date;
+    function isValidBookingDate(input) {
+        if (!input || !input.value) return false;
 
-            if (eventDate.value && eventDate.value < wib.date) {
-                eventDate.value = "";
-            }
-        }
+        const wib = getWIBNow();
+        const year = Number(input.value.slice(0, 4));
+        const maxYear = Number(wib.date.slice(0, 4)) + 2;
+
+        return (
+            /^\d{4}-\d{2}-\d{2}$/.test(input.value) &&
+            year <= maxYear &&
+            input.value >= wib.date &&
+            input.validity.valid
+        );
     }
 
     cafeDate?.addEventListener("change", updateBookingLimits);
@@ -6821,9 +6885,8 @@ syncGlobalModalState();
             : -1;
 
         if (
-            !cafeDate?.value ||
+            !isValidBookingDate(cafeDate) ||
             !selectedTime ||
-            cafeDate.value < wib.date ||
             (cafeDate.value === wib.date && selectedMinutes <= wib.minutes)
         ) {
             event.preventDefault();
@@ -6835,7 +6898,7 @@ syncGlobalModalState();
     eventForm?.addEventListener("submit", function (event) {
         updateBookingLimits();
 
-        if (!eventDate?.value || eventDate.value < getWIBNow().date) {
+        if (!isValidBookingDate(eventDate)) {
             event.preventDefault();
             event.stopImmediatePropagation();
             alert("Please select a valid event date (WIB).");
@@ -6850,7 +6913,6 @@ syncGlobalModalState();
 
     updateBookingLimits();
 })();
-
 
 /* =====================================================
    KAIARA GARDEN WEBSITE
