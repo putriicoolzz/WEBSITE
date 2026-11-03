@@ -1178,7 +1178,7 @@ const ROOM_DATA = {
         view:
             "Kaiara Garden",
 
-        aamenities: [
+        amenities: [
             "Main Bedroom on Lower Floor",
             "Open-Plan Sleeping Area Upstairs",
             "2 Bathrooms (Bathtub & Shower)",
@@ -2650,7 +2650,17 @@ const FACILITY_DATA = {
 
                 value:
                     "Available as part of selected event arrangements"
-            }
+            },
+
+            {
+                label: "Pool Depth",
+                value: "1.2 m"
+            },
+
+            {
+                label: "Water Temperature",
+                value: "Mildly Heated Pool"
+            },
 
         ],
 
