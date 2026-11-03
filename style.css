@@ -3301,9 +3301,10 @@ body.loaded {
 
 
 .room-spec-grid strong {
+    font-family: var(--sans);
     font-size: 14px;
 
-    font-weight: 500;
+    font-weight: 400;
 
     color: #363d36;
 }

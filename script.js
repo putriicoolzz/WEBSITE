@@ -1014,7 +1014,7 @@ const ROOM_DATA = {
             "A comfortable room for two with a standing balcony overlooking the garden — an easy place to rest and settle into during your stay.",
 
         size:
-            "Approx. 17.52 m² interior",
+            "Approx. 22 m² interior including standing balcony",
 
         bed:
             "Queen or Twin Beds",
@@ -1030,7 +1030,6 @@ const ROOM_DATA = {
             "Wi-Fi",
             "Standing Balcony",
             "Garden View",
-            "Private Bathroom"
         ],
 
         included: [
@@ -1065,7 +1064,7 @@ const ROOM_DATA = {
             "A comfortable room for two with its own terrace and outdoor seating — a relaxed extension of the room for an easy morning or quiet afternoon.",
 
         size:
-            "Approx. 24.12 m² including terrace",
+            "Approx. 24 m² including terrace",
 
         bed:
             "Queen or Twin Beds",
@@ -1081,7 +1080,6 @@ const ROOM_DATA = {
             "Wi-Fi",
             "Private Terrace",
             "Outdoor Seating",
-            "Private Bathroom"
         ],
 
         included: [
@@ -1116,7 +1114,7 @@ const ROOM_DATA = {
             "A more spacious room for two, with views towards the pool and main garden and a private bathtub for a little more time to unwind.",
 
         size:
-            "🔴 [SIZE TO CONFIRM]",
+            "Approx. 40 m² interior including privatestanding balcony",
 
         bed:
             "King Bed",
@@ -1134,7 +1132,7 @@ const ROOM_DATA = {
             "Private Bathtub",
             "Television",
             "Pool & Garden View",
-            "Private Bathroom"
+            "Bathtub & Shower"
         ],
 
         included: [
@@ -1166,32 +1164,36 @@ const ROOM_DATA = {
             "A home-style stay, made for sharing.",
 
         description:
-            "A two-level stay with two bedrooms, shared living and dining spaces, and more room to spend time together — suited to families or small groups.",
+            "A two-level loft designed for families and small groups, featuring a main bedroom on the lower floor, an open-plan sleeping area upstairs, and shared spaces to relax and spend time together.",
 
         size:
-            "🔴 [SIZE TO CONFIRM]",
+            "112 m² interior",
 
         bed:
-            "1 King Bed + 2 Single Beds",
+            "1 Double Bed + 3 Single Beds + 1 Sofa Bed",
 
         guests:
-            "4 Guests · Up to 5 by arrangement",
+            "5 Guests",
 
         view:
             "Kaiara Garden",
 
-        amenities: [
-            "2 Bedrooms",
-            "2 Bathrooms",
+        aamenities: [
+            "Main Bedroom on Lower Floor",
+            "Open-Plan Sleeping Area Upstairs",
+            "2 Bathrooms (Bathtub & Shower)",
             "Living Area",
             "Dining Area",
             "Sofa Bed",
+            "Private Terrace",
+            "Private Balcony",
+            "Private Garden",
             "Air Conditioning in Main Bedroom",
-            "Wi-Fi"
+            "Wi-Fi",
         ],
 
         included: [
-            "Breakfast for 4 Guests",
+            "Breakfast for up to 5 Guests",
             "Access to Shared Guest Facilities",
             "Daily Housekeeping",
             "Wi-Fi"
