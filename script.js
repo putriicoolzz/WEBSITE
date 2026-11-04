@@ -2534,6 +2534,8 @@ const facilityGuidelinesNote =
 
 const FACILITY_DATA = {
 
+
+
     garden: {
 
         name:
@@ -2553,44 +2555,39 @@ const FACILITY_DATA = {
             "Thoughtfully landscaped spaces surround Kaiara, creating quiet corners for fresh air, slow walks, and unhurried moments throughout your stay.",
 
         details: [
-
             {
-                label:
-                    "Access",
-
-                value:
-                    "Available throughout your stay"
+                label: "Access",
+                value: "Available throughout your stay"
             },
-
             {
-                label:
-                    "Garden Areas",
-
-                value:
-                    "Landscaped green spaces across the property"
+                label: "Garden Areas",
+                value: "Landscaped green spaces across the property"
             },
-
             {
-                label:
-                    "A Gentle Reminder",
-
-                value:
-                    "Please enjoy the garden with consideration for other guests"
+                label: "Relaxation",
+                value: "Picnic mats available upon request"
+            },
+            {
+                label: "Activities",
+                value: "By prior arrangement"
             }
-
         ],
 
         guidelinesTitle:
-            null,
+            "Garden Guidelines",
 
-        guidelines:
-            [],
+        guidelines: [
+            "Feel free to unwind and enjoy the shared garden spaces at your own pace.",
+            "Picnic mats are available upon request for a more relaxed moment outdoors.",
+            "For group activities or special gatherings, kindly coordinate with our team in advance.",
+            "The private garden within Oak Loft is reserved exclusively for Oak Loft guests.",
+            "Please help us preserve the peaceful atmosphere for everyone to enjoy."
+        ],
 
         guidelinesNote:
             ""
 
     },
-
 
     pool: {
 
@@ -2608,7 +2605,7 @@ const FACILITY_DATA = {
             "An easy pause surrounded by greenery.",
 
         description:
-            "Set within Kaiara’s garden surroundings, our swimming pool is a refreshing place to cool down, slow the pace, and enjoy an easy afternoon.",
+            "Surrounded by the greenery of Kaiara’s gardens, our swimming pool offers a refreshing escape to cool off, unwind, and enjoy a leisurely afternoon.",
 
         details: [
 
@@ -2633,7 +2630,7 @@ const FACILITY_DATA = {
                     "Swimwear",
 
                 value:
-                    "Proper swimwear required"
+                    "Appropriate swimwear required"
             },
 
             {
@@ -2644,13 +2641,6 @@ const FACILITY_DATA = {
                     "Adult supervision required"
             },
 
-            {
-                label:
-                    "Event Use",
-
-                value:
-                    "Available as part of selected event arrangements"
-            },
 
             {
                 label: "Pool Depth",
@@ -2660,6 +2650,14 @@ const FACILITY_DATA = {
             {
                 label: "Water Temperature",
                 value: "Mildly Heated Pool"
+            },
+
+            {
+                label:
+                    "Event Use",
+
+                value:
+                    "Available for private events by prior arrangement"
             },
 
         ],
@@ -2710,13 +2708,13 @@ const FACILITY_DATA = {
             "A warm corner made for slowing down.",
 
         description:
-            "Settle in and unwind with a warm, relaxing soak — a quiet moment to slow down during your stay at Kaiara.",
+            "Ease into the warmth of our jacuzzi and enjoy a peaceful moment of relaxation, surrounded by the calm of Kaiara.",
 
         details: [
 
             {
                 label:
-                    "Available Hours",
+                    "Opening Hours",
 
                 value:
                     "08:00 – 21:00"
@@ -2805,7 +2803,7 @@ const FACILITY_DATA = {
             "A simple space to keep moving during your stay.",
 
         description:
-            "Our mini gym offers a convenient space for a light workout, making it easy to stay active while enjoying a slower stay at Kaiara.",
+            "Whether you're starting your morning with a light workout or keeping up with your routine, our mini gym offers a comfortable space to stay active during your stay.",
 
         details: [
 
